@@ -1,0 +1,129 @@
+@charset "utf-8";
+/* CSS Document */
+#jsddm{	
+    margin: 0;
+    padding: 0;
+    float:right;
+    width:100%;
+    display:inline-block;
+    border-bottom:#ddd 1px solid;
+}
+#jsddm.poppage{
+    float:none;
+    clear:both;
+    margin:0 auto;
+    height:auto;
+    overflow:hidden;
+    margin-bottom:10px;
+}	
+#jsddm ul, #jsddm li{	
+    list-style:none;
+}
+#jsddm li{	
+    height:38px;
+    float: left;
+    font-size: 13px;
+    text-align:center;
+    font-weight:500;
+    background:#555;
+    display:inline-block;
+    border-radius:6px 6px 0 0;
+    -moz-border-radius:6px 6px 0 0;
+    -webkit-border-radius:6px 6px 0 0;
+    margin-left:3px;
+    position:relative;
+}
+#jsddm li#drop{
+    background:url(../images/icon.png) right 14px no-repeat;
+}
+#jsddm li .round{	
+    width:20px;
+    height:20px;
+    position:absolute;
+    top:2px;
+    right:2px;
+    z-index:99;
+    border-radius:15px;
+    -moz-border-radius:15px;
+    -webkit-border-radius:15px;
+    background:#990000;
+    color:#fff;
+    line-height:20px;
+    font-size:11px;
+    text-align:center;
+    -moz-opacity: 0.60;
+    -khtml-opacity: 0.60;
+    opacity: 0.60;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+    filter:alpha(opacity=60);
+}
+#jsddm li.last{	
+    border-right:none;
+}
+#jsddm li.act{	
+    background:#ddd;
+    font-size:13px;
+}
+#jsddm li a{	
+    display: block;
+    padding: 10px 18px 10px 18px;
+    text-align:center;
+    text-decoration: none;
+    width: auto;
+    line-height:18px;
+    color: #FFFFFF;
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow:0px 1px 1px rgba(74,74,75,0.3);
+    white-space: nowrap;
+}
+#jsddm li#drop a{
+    padding: 10px 22px 10px 15px;
+}
+#jsddm li.act a{
+    color:#333;
+}
+#jsddm li:hover{
+    background:#003663;
+    color:#111;
+}
+#jsddm li.act:hover{
+    background:#ddd;
+}
+#jsddm li ul{
+    width:auto;
+    height:auto;
+    display:block;
+    position: absolute;
+    overflow:visible;
+    visibility: hidden;
+    z-index:2000;
+    background: #1f3444;
+    border-left:#0e324e 1px solid;
+    border-right:#0e324e 1px solid;
+    border-bottom:#0e324e 1px solid;
+    margin-top:-1px;
+}
+#jsddm li ul li{	
+    float: none;
+    display: block;
+    border:none; /* required */
+    background:none;
+    border-bottom:#103c5f 1px solid;
+}
+#jsddm li ul li a{
+    min-width:170px;
+    width:auto;
+    display: block;
+    padding: 11px 20px 11px 20px;
+    text-align:left;
+    text-decoration: none;
+    text-transform:capitalize;
+}
+#jsddm li ul li.last{	
+    border-bottom:none;
+}
+
+#jsddm li ul li:hover{
+    background:#d30000;
+}

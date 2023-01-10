@@ -1,0 +1,72 @@
+Options +FollowSymlinks
+RewriteEngine on
+Redirect 301 / http://sunbird.lk/
+
+# force www url
+RewriteCond %{HTTP_HOST} ^jfalanka.com$
+RewriteRule ^(.*)$ "http\:\/\/www\.jfalanka\.com\/$1" [R=301,L]
+
+#remove the .php extention 
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME}\.php -f 
+RewriteRule ^(.*)$ $1.php
+
+#redirecting and rewriting 
+RewriteRule ^page/([^/\.]+)/?$ ./pages.php?page=$1 [QSA]
+RewriteRule ^service/([^/\.]+)/?$ ./services.php?cat_url_slug=$1 [QSA]
+#$2 was changed to $3 due to $2 comes with /
+RewriteRule ^category/([^/\.]+)(/([^/]+))? ./categories.php?cat_url_slug=$1&sub_url_slug=$3 [QSA]
+RewriteRule ^brand/([^/\.]+)/?$ ./brands.php?brand_code=$1 [QSA]
+RewriteRule ^product/([^/\.]+)/?$ ./product-item.php?post_url_slug=$1 [QSA]
+RewriteRule ^posts/([^/\.]+)(/([^/]+))? ./category-posts.php?cat_url_slug=$1&sub_url_slug=$3 [QSA]
+RewriteRule ^post/([^/\.]+)/?$ ./product-item.php?post_url_slug=$1 [QSA]
+RewriteRule ^tickets/([^/\.]+)/?$ ./registration.php?ticket_type=$1 [QSA]
+
+# Disable the server signature 
+ServerSignature Off
+
+#Protect site_config.php
+<files site_config.php>
+order allow,deny
+deny from all
+</files>
+
+# Deny access to all .htaccess files
+<files ~ "^.*\.([Hh][Tt][Aa])">
+order allow,deny
+deny from all
+satisfy all
+</files>
+
+# Disable directory browsing
+Options -Indexes
+
+# Display custom error pages 
+Options -Indexes
+ErrorDocument 400 /errors/400.php
+ErrorDocument 403 /errors/403.php
+ErrorDocument 404 /errors/404.php
+ErrorDocument 500 /errors/500.php
+ErrorDocument 503 /errors/503.php
+
+# Setup browser caching
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access 1 year"
+ExpiresByType image/jpeg "access 1 year"
+ExpiresByType image/gif "access 1 year"
+ExpiresByType image/png "access 1 year"
+ExpiresByType text/css "access 1 month"
+ExpiresByType application/pdf "access 1 month"
+ExpiresByType text/x-javascript "access 1 month"
+ExpiresByType application/x-shockwave-flash "access 1 month"
+ExpiresByType image/x-icon "access 1 year"
+ExpiresDefault "access 2 days"
+</IfModule>
+
+#### Black List Section ####
+#This section is meant to be edited only through the Blacklist tool in your account manager. Please do not edit it manually.
+Order Allow,Deny
+Allow from All
+Deny from 89.37.119.196
+#### End of Black List Section ####
