@@ -46,13 +46,10 @@
       padding: 0;
       margin: 0;
    }
-   .filler ::after {
-  content: "-------------------------";
-  display: inline-block;
-  width: 100%;
-  height: auto;
-  z-index: -1;
-  position: absolute;
+   .live, .live>a {
+	color: blue;
+   }
+   
 }
    </style>
 
@@ -77,11 +74,10 @@ $site = ["JFA Lanka", "jfalanka.com"];
             echo '<li><a href="' . $dir . '" target="siteView" title="View Folder">' . $dir . '</a></li>';
          };
          ?>    
-		<span class="filler">&nbsp; →→</span>
-		<li ><a href="http://www.<?= $site[1] ?>" title="💡Ctrl-click - new page" target="siteView"
+		<span class="live">&nbsp; ( <small><em>Live:&nbsp;</em></small></span>
+		<li class="live"><a href="http://www.<?= $site[1] ?>" title="💡Ctrl-click - new page" target="siteView"
                rel="noopener"><?= $site[1] ?></a></li>
-			   
-         
+		<span class="live">&nbsp;)</span>
       </ul>
    </span>
 
