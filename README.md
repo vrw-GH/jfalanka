@@ -1,7 +1,15 @@
-# jfalanka
+# Project: JFA - jfalanka
 
- JFA website - root
+## JFA website - root (home page)
+
+![screenshot](../jfalanka/assets/Screenshot.png)
+
+---
 
 Versions:
 
-Web Backup: [JFA_2022-12](./jfa_2022-12/index.php)
+* Online: [Beta](./builds/_current/index.php)
+* Dev Build: [current](./builds/_current/index.php)
+* Web Backup: [JFA_2022-12](./builds/jfa_2022-12/index.php)
+
+* Live: [jfalanka.com](www.jfalanka.com)
