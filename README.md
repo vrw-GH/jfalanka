@@ -1,8 +1,8 @@
 # Project: JFA - jfalanka
 
-## JFA website - root (home page)
-
 <div style="text-align: center;">
+
+## JFA website - root (home page)
 
 ![screenshot](https://github.com/vrw-GH/assets/raw/main/repo-media/jfalanka/Screenshot.png)
 
