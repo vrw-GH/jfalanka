@@ -2,7 +2,11 @@
 
 ## JFA website - root (home page)
 
+<div style="text-align: center;">
+
 ![screenshot](https://github.com/vrw-GH/assets/raw/main/repo-media/jfalanka/Screenshot.png)
+
+</div>
 
 ---
 
