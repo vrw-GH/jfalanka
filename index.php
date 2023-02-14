@@ -12,10 +12,6 @@
    <title>JFA Lanka</title>
 
    <style>
-      /* a {
-         text-decoration: none;
-      } */
-
       iframe[name=siteView] {
          background-color: #f1e2e250;
          border: 1px solid #f1e2e230;
@@ -42,7 +38,6 @@
          min-width: max-content;
          list-style-position: inside;
          list-style-type: " ☼ ";
-
          padding: 0;
          margin: 0;
       }
@@ -62,27 +57,23 @@ $site = ["JFA Lanka", "jfalanka.com"];
 
 <body>
    <span><em>Project:</em> <strong> <?= $site[0] ?></strong>
-      <!-- &emsp; -->
-      <a href="README.md" target="siteView" title="Readme Page">👁️‍🗨️</a>
       &emsp;
-      <!-- <small><em>Local:</em></small> -->
+      <a href="docs/README.md" target="siteView" title="Readme Page">👁️‍🗨️</a>
       <ul>
-         <!-- <em><small>Online: </em></small> -->
-
          <?php
          foreach ($subdir as $dir) {
             echo '<li><a href="' . $dir . '" target="siteView" title="View Folder">' . $dir . '</a></li>';
          };
          ?>
-         <span class="live">&nbsp; ( <small><em>Live:&nbsp;</em></small></span>
-         <li class="live"><a href="http://www.<?= $site[1] ?>" title="💡Ctrl-click - new page" target="siteView" rel="noopener"><?= $site[1] ?></a></li>
-         <span class="live">&nbsp;)</span>
+         <!-- <span class="live">&nbsp; ( </span> -->
+         <li class="live"><a href="http://www.<?= $site[1] ?>" title="💡Ctrl-click - new page" target="siteView" rel="noopener"><small>🌎&nbsp;</small><?= $site[1] ?></a></li>
+         <!-- <span class="live">&nbsp;)</span> -->
       </ul>
    </span>
 
 
    <div id="frametitle">Site View</div>
-   <iframe name="siteView" src="README.md" loading="lazy" title="siteView"></iframe>
+   <iframe name="siteView" src="docs/README.md" loading="lazy" title="siteView"></iframe>
 
 </body>
 
