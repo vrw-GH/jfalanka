@@ -2,17 +2,17 @@
 
 class dbConfig {
 
-    private $db_host = "gripf001.mysql.guardedhost.com";
-    private $db_user = "gripf001_jfalanka";
-    private $db_pass = "37pGz9p^vAtx";
-    private $db_name = "gripf001_jfalanka";
+    // private $db_host = "gripf001.mysql.guardedhost.com";
+    // private $db_user = "gripf001_jfalanka";
+    // private $db_pass = "37pGz9p^vAtx";
+    // private $db_name = "gripf001_jfalanka";
 
-    /*
+    
       private $db_host = "localhost";
       private $db_user = "root";
-      private $db_pass = "1234";
-      private $db_name = "jfahome";
-     */
+      private $db_pass = "Sk7175";
+      private $db_name = "jfalanka";
+    
 
     /* connection variable */
     private $dbq;
@@ -63,4 +63,3 @@ class dbConfig {
 
 /* set default timezone */
 date_default_timezone_set('Asia/Colombo');
-?>
