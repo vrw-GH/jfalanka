@@ -7,20 +7,20 @@ if (!isset($_SESSION)) {
 /* ------------------------------------------------------------------------------
  * Site-wide DEFINITIONS  
  */
-	/* To Use Local (Dev) 
+/* To Use Local (Dev) 
 	* - do not copy this folder to online site
 	*/
-	if (file_exists('.localDevOnly/dev-definitions.php')) {
-		include_once '.localDevOnly/dev-definitions.php';
-	}
+if (file_exists('.localDevOnly/dev-definitions.php')) {
+    include_once '.localDevOnly/dev-definitions.php';
+}
 /* Site URL for .htaccess UrlReWrite (without end /) */
-if (!defined('WEB_HOST')) 	define('WEB_HOST', 'http://www.jfalanka.com');
-if (!defined('SITE_DEV'))	define('SITE_DEV', ["http://slwebcreations.com","SL Web Creations"]);
-if (!defined('SITE1')) 		define('SITE1', ["http://tropicalhomes.lk","TROPICAL Homes"]);
-if (!defined('SITE2')) 		define('SITE2', ["http://sunbird.lk","SUNBIRD Technology"]);
-if (!defined('SITE3')) 		define('SITE3', ["http://sensepv.lk","SENSE PV Systems"]);
-if (!defined('SEND_EMAIL'))	define('SEND_EMAIL', 'noreply@jfalanka.com'); /* use accountname@host.phenomhost.com */
-if (!defined('REC_EMAIL'))	define('REC_EMAIL', $website['email']);
+if (!defined('WEB_HOST'))     define('WEB_HOST', 'http://www.jfalanka.com');
+if (!defined('SITE_DEV'))    define('SITE_DEV', ["http://slwebcreations.com", "SL Web Creations"]);
+if (!defined('SITE1'))         define('SITE1', ["http://tropicalhomes.lk", "TROPICAL Homes"]);
+if (!defined('SITE2'))         define('SITE2', ["http://sunbird.lk", "SUNBIRD Technology"]);
+if (!defined('SITE3'))         define('SITE3', ["http://sensepv.lk", "SENSE PV Systems"]);
+if (!defined('SEND_EMAIL'))    define('SEND_EMAIL', 'noreply@jfalanka.com'); /* use accountname@host.phenomhost.com */
+if (!defined('REC_EMAIL'))    define('REC_EMAIL', $website['email']);
 
 /*
  * -----------------------------------------------------------------------------
@@ -94,11 +94,13 @@ while ($row = mysqli_fetch_assoc($result)) {
     $website['domain'] = $row['comp_domain']; /* without www and http */
     $website['google_map'] = $row['comp_google_map'];
     $website['google_map_size'] = $row['comp_google_map_size'];
+    $website['comp_logo'] = $row['comp_logo'];
     $website['skype'] = $row['comp_skype'];
     $website['fb'] = $row['comp_fb'];
     $website['tw'] = $row['comp_tw'];
     $website['gplus'] = $row['comp_gplus'];
     $website['yt'] = $row['comp_yt'];
+    $website['pint'] = $row['comp_pint'];
     /* SEO Data */
     $config['seo']['seo_title'] = $row['seo_title'];
     $config['seo']['seo_dscp'] = $row['seo_dscp'];
@@ -148,4 +150,3 @@ $full_url = "$protocol://{$domain}{$disp_port}{$base_url}"; /* Ex: 'http://examp
 	// echo $port;echo "<br>";
 	// echo $disp_port;echo "<br>";
 	// echo $domain;echo "<br>";
-?>
