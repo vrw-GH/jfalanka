@@ -6,10 +6,15 @@
 
 ---
 
+<pre>
+Developer:   Victor Wright
+Client:      JFA
+Date:        19 Jan 2023
+
 Versions:
+*Beta(Online): <a href="https://github.com/vrw-GH/jfalanka/tree/main/builds/_current">builds/_current</a>
+* Dev Build:   <a href="https://github.com/vrw-GH/jfalanka/tree/main/dev">jfalanka/dev</a>
+* Live Site:   <a href="http://www.jfalanka.com">jfalanka.com</a>
 
-* Online: [Beta](./builds/_current/index.php)
-* Dev Build: [current](./builds/_current/index.php)
-* Web Backup: [JFA_2022-12](./builds/jfa_2022-12/index.php)
-
-* Live: [jfalanka.com](https://www.jfalanka.com)
+GH Page:     <a href="https://vrw-gh.github.io/jfalanka/">vrw-gh.github.io/jfalanka</a>
+</pre>
