@@ -12,6 +12,7 @@
    <title>JFA Lanka</title>
 
    <style>
+
    iframe[name=siteView] {
       background-color: #f1e2e250;
       border: 1px solid #f1e2e230;
@@ -74,7 +75,6 @@ $site = ["JFA Lanka", "jfalanka.com"];
             echo '<li><a href="' . $dir . '" target="siteView" title="View Folder">' . $dir . '</a></li>';
          };
          ?>
-
          <!-- <span class="live">&nbsp; ( </span> -->
          <li class="live"><a href="http://www.<?= $site[1] ?>" title="💡Ctrl-click - new page" target="siteView"
                rel="noopener"><small>🌎&nbsp;</small><?= $site[1] ?></a></li>
@@ -87,6 +87,7 @@ $site = ["JFA Lanka", "jfalanka.com"];
    <iframe name="siteView" src="docs/README.md" loading="lazy" title="siteView" srcdocxx="Loading..."
       srcdoc='<?= $readmeMD ?>' onload="this.removeAttribute('srcdocxx')">
    </iframe>
+
 
 </body>
 
