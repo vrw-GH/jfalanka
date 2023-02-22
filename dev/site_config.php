@@ -53,8 +53,8 @@ $website['jquery_ui_structure_css'] = 'resources/css/jquery-ui.structure.min.css
  * -----------------------------------------------------------------------------
  * Database Connection
  */
-if (file_exists('models/dbConfig.php')) {
-    include_once 'models/dbConfig.php';
+if (file_exists('./models/dbConfig.php')) {
+    include_once './models/dbConfig.php';
 } else if (file_exists('../models/dbConfig.php')) {
     include_once '../models/dbConfig.php';
 } else {
@@ -67,8 +67,8 @@ $myCon->connect();
  * -----------------------------------------------------------------------------
  * Encryption
  */
-if (file_exists('models/encryption.php')) {
-    include_once 'models/encryption.php';
+if (file_exists('./models/encryption.php')) {
+    include_once './models/encryption.php';
 } else if (file_exists('../models/encryption.php')) {
     include_once '../models/encryption.php';
 } else {

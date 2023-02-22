@@ -4,7 +4,7 @@
          <div
             class="col-xs-12 col-sm-4 col-md-4 col-lg-3 side-menu dark-color text-center text-center col-xs-text-center col-xxs-text-center">
             <div class="voffset-b-5">&nbsp;</div>
-            <a href="<?php echo WEB_HOST ?>/index.php"><img
+            <a href="<?php echo WEB_HOST ?>/home.php#"><img
                   src="<?php echo WEB_HOST ?>/resources/images/logo-footer.png" alt="<?php echo $website['domain']; ?>"
                   class="img-responsive img-center" /></a>
             <ul class="listnone text-center voffset-5">

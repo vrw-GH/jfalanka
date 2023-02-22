@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <meta name="robots" content="index,follow">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=1">
-   <link rel="icon" href="resources/images/favicon.ico" type="image/x-icon">
+   <link rel="icon" href="./resources/images/favicon.ico" type="image/x-icon">
    <title>JFA Home Page</title>
    <style>
    body {
