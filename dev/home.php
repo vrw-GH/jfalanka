@@ -55,7 +55,7 @@ $canonical_url = WEB_HOST;
    <meta name="keywords" content="<?php echo $config['seo']['seo_keywords'] ?>">
    <meta name="robots" content="index,follow">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=1">
-   <link rel="icon" href="resources/images/favicon.ico" type="image/x-icon">
+   <!-- <link rel="icon" href="./resources/images/favicon.ico" type="image/x-icon"> -->
    <?php
    /* enable google analytics */
    $seo_social = true;
@@ -68,30 +68,37 @@ $canonical_url = WEB_HOST;
    <div id="wrapper">
       <div id="container">
          <?php include_once './header.php'; ?>
-         <div class="container-fluid bg1">
-            <div class="col-xs-12">
+         <div class="container-fluid bg1" style="margin-top:5rem;">
+            <!-- <div class="col-xs-12" style="background-color: #ffffff99;"> -->
+            <div class="col-xs-12" style="background-image: linear-gradient(to bottom, white,white,#ffffff99);">
                <div class="row">
                   <div class="container  voffset-2">
                      <div class="row animatedParent">
                         <div class="col-xs-12 voffset-2 visible-xs">&nbsp;</div>
+
                         <a href="<?= WEB_HOST ?>">
                            <img src="<?= $website['comp_logo']; ?>"
                               class="img-responsive img-center animated fadeInUpShort" alt="JFA" />
                         </a>
-                        <h1 class="voffset-1 voffset-b-2 text-center text-uppercase text-bold animated fadeInDownShort">
+
+                        <h1
+                           class="voffset-1 voffset-b-2 text-center text-uppercase text-bold animated *fadeInDownShort">
                            Welcome to Jude Fernandopulle Associates (Pvt) Ltd.</h1>
-                        <svg height="130" width="130" class="img-responsive img-center animated fadeInUpShort"
-                           alt="JFA">
+
+                        <svg height="130" width="130" class="img-responsive img-center animated fadeInDownShort"
+                           alt="Anniversary">
                            <text x="0" y="70" fill="#0020BB30"
-                              style="font-family:Georgia;font-size:120;"><?= date('Y') - 1989 ?></text>
-                           <text x="45" y="83" fill="grey" style="font-family:serif;font-size:18;">years</text>
+                              style="font-family:georgia;font-size:12rem;"><?= date('Y') - 1989 ?></text>
+                           <text x="50" y="83" fill="grey" style="font-family:serif;font-size:1.6rem;">years</text>
                            <text x="13" y="109">▒ ANNIVERSARY ▒</text>
-                           <text x="37" y="128" style="font-style:italic;font-size:12;">1989-<?= date('Y') ?></text>
+                           <text x="37" y="128" style="font-style:italic;font-size:1.2rem;">1989
+                               - <?= date('Y') ?></text>
                            <g fill="none" stroke="black">
                               <path stroke="black" d="M13 95 l107 0" />
                               <path stroke="grey" d="M13 114 l107 0" />
                            </g>
                         </svg>
+
                         <!-- <img src="resources/images/30yrAnniv5.png"
                            class="img-responsive img-center animated fadeInUpShort" alt="JFA" /> -->
                      </div>
@@ -128,7 +135,8 @@ $canonical_url = WEB_HOST;
                                           <a
                                              href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>"><img
                                                 src="<?php echo ($row['upload_path'] != null) ? 'uploads/' . $row['upload_path'] : $row['cat_logo']; ?>"
-                                                class="img-responsive" alt="<?php echo $row['cat_url_slug']; ?>"></a>
+                                                height="50" class="img-responsive"
+                                                alt="<?php echo $row['cat_url_slug']; ?>"></a>
                                        </div>
                                        <div class="col-xs-12 col-lg-pdn-both-0 voffset-4">
                                           <h1 class="text-smallcaps"><?php echo $row['cat_name']; ?></h1>
@@ -148,15 +156,15 @@ $canonical_url = WEB_HOST;
                </div>
             </div>
          </div>
-         <div class="container-fluid">
-            <div class="row">
-               <div class="contact-about col-xs-12">
+         <div class="container-fluid bg1">
+            <div class="row" style="background-color: transparent">
+               <div class="contact-about col-xs-12" style="background-color: transparent;">
                </div>
             </div>
          </div>
          <div class="others bg2">
-            <div class="container-fluid animatedParent color3">
-               <div class="container voffset-3 voffset-b-3 white">
+            <div class="container-fluid animatedParent color3" style=" background-color: #ffffff99">
+               <div class="container voffset-3 voffset-b-3" style="background-color: #ffffff99;">
                   <div class="row">
                      <div class="voffset-3 visible-xs">&nbsp;</div>
                      <div class="col-xs-12 voffset-b-2 front-jumbo-box">
@@ -202,7 +210,7 @@ $canonical_url = WEB_HOST;
                         <div class="col-xs-12 col-sm-6 animated fadeInRightShort">
                            <div class="col-xs-12 col-xxs-pdn-both-0 voffset-b-4">
                               <div class="col-xs-12 voffset-2 visible-lg">&nbsp;</div>
-                              <a href="<?= WEB_HOST ?>">
+                              <a href="<?= WEB_HOST ?>/home.php#">
                                  <img src="<?= $website['comp_logo']; ?>" class="img-responsive img-center" alt="JFA" />
                               </a>
                               <div class="text-bold text-info text-center">
@@ -247,17 +255,22 @@ $canonical_url = WEB_HOST;
             </div>
          </div>
          <!-- END of Other -->
-         <div class="container-fluid">
+         <div class="container-fluid bg2">
             <div class="row">
                <a id="contact_link-anchor"></a>
                <a id="contact_link"></a>
-               <div class="contact-about col-xs-12">
+               <div class="contact-about col-xs-12" style="background-color: #ffffff99">
                   <h1>We'd Love to hear from You</h1>
                   <div class="col-xs-12 visible-xs voffset-1">&nbsp;</div>
-                  <h3 class="voffset-3 col-xs-12 col-sm-6 col-lg-4"><span
-                        class="glyphicons glyphicons-iphone-shake"></span> <?php echo $website['hotline']; ?></h3>
-                  <h3 class="voffset-3 voffset-b-2 col-xs-12 col-sm-6 col-lg-4"><span
-                        class="glyphicons glyphicons-envelope"></span> <a
+                  <h3 class="voffset-3 col-xs-12 col-sm-6 col-lg-4"
+                     style="text-shadow: 2px 2px 1px white, -5px -4px 3px white; "><span
+                        class="glyphicons glyphicons-iphone-shake"></span>
+                     <a href="tel:<?php echo $website["hotline"]; ?>">
+                        <?php echo $website['hotline']; ?></a>
+                  </h3>
+                  <h3 class="voffset-3 voffset-b-2 col-xs-12 col-sm-6 col-lg-4"
+                     style="text-shadow: 2px 2px 1px white, -5px -4px 3px white;">
+                     <span class="glyphicons glyphicons-envelope"></span> <a
                         href="mailto:<?php echo $website["email"]; ?>"><?php echo $website["email"]; ?></a>
                      <?php
                      if (isset($website["email2"]) && $website["email2"] != null) {

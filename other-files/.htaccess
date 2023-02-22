@@ -1,0 +1,7 @@
+RemoveHandler .php .html
+RemoveType .php .html
+
+#IndexOptions +FancyIndexing
+#IndexIgnore index.php index.html
+#DirectoryIndex disable.unknown
+DirectoryIndex disabled
