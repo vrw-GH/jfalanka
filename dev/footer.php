@@ -22,7 +22,7 @@
          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 side-menu">
             <ul class="listnone">
                <li class="h1">Quick Links</li>
-               <li><a href="#">Home</a></li>
+               <li><a href="#" class="scrollme">Home</a></li>
                <li><a href="#about">About Us</a></li>
                <li><a href="#contact_link">Contact Us</a></li>
                <li><a href="<?= SITE2[0] ?>/page/opportunities">Careers & Business Opportunities</a></li>

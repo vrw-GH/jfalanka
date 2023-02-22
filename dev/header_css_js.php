@@ -154,6 +154,7 @@ $(function() {
    });
    /* Tooltip */
    $('[data-toggle="tooltip"]').tooltip();
+
    /* scroll button START ------- */
    $('body').append(
       '<div id="toTop" class="btn btn-info"><span class="glyphicon glyphicon-chevron-up"></span></div>');
@@ -171,7 +172,9 @@ $(function() {
       return false;
    });
    /* scroll button END --------- */
+
 });
+
 /* menu top fix if the menu on bottom of the header  --------- */
 $(function() {
    var nav = $('.menu-top');

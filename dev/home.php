@@ -77,18 +77,14 @@ $canonical_url = WEB_HOST;
                         <div class="col-xs-12 voffset-2 visible-xs">&nbsp;</div>
 
                         <a href="<?= WEB_HOST ?>">
-                           <img src="<?= $website['comp_logo']; ?>"
-                              class="img-responsive img-center animated fadeInUpShort" alt="JFA" />
+                           <img src="<?= $website['comp_logo']; ?>" class="img-responsive img-center animated fadeInUpShort" alt="JFA" />
                         </a>
 
-                        <h1
-                           class="voffset-1 voffset-b-2 text-center text-uppercase text-bold animated *fadeInDownShort">
+                        <h1 class="voffset-1 voffset-b-2 text-center text-uppercase text-bold animated *fadeInDownShort">
                            Welcome to Jude Fernandopulle Associates (Pvt) Ltd.</h1>
 
-                        <svg height="130" width="130" class="img-responsive img-center animated fadeInDownShort"
-                           alt="Anniversary">
-                           <text x="0" y="70" fill="#0020BB30"
-                              style="font-family:georgia;font-size:12rem;"><?= date('Y') - 1989 ?></text>
+                        <svg height="130" width="130" class="img-responsive img-center animated fadeInDownShort" alt="Anniversary">
+                           <text x="0" y="70" fill="#0020BB30" style="font-family:georgia;font-size:12rem;"><?= date('Y') - 1989 ?></text>
                            <text x="50" y="83" fill="grey" style="font-family:serif;font-size:1.6rem;">years</text>
                            <text x="13" y="109">▒ ANNIVERSARY ▒</text>
                            <text x="37" y="128" style="font-style:italic;font-size:1.2rem;">1989
@@ -124,29 +120,24 @@ $canonical_url = WEB_HOST;
                               $colum = '';
                            }
                         ?>
-                        <!-- START -->
-                        <div class="col-xs-6 col-sm-4 <?php echo $colum; ?> col-xxs-full-width voffset-b-5">
-                           <div class="container-fluid col-xs-pdn-both-0">
-                              <div class="col-xs-12">
-                                 <div class="row">
-                                    <div class="front-items sp animated pulse slow hvr-overline-from-center"
-                                       data-id='<?php echo $data_id; ?>'>
-                                       <div class="icon-wrap">
-                                          <a
-                                             href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>"><img
-                                                src="<?php echo ($row['upload_path'] != null) ? 'uploads/' . $row['upload_path'] : $row['cat_logo']; ?>"
-                                                height="50" class="img-responsive"
-                                                alt="<?php echo $row['cat_url_slug']; ?>"></a>
-                                       </div>
-                                       <div class="col-xs-12 col-lg-pdn-both-0 voffset-4">
-                                          <h1 class="text-smallcaps"><?php echo $row['cat_name']; ?></h1>
+                           <!-- START -->
+                           <div class="col-xs-6 col-sm-4 <?php echo $colum; ?> col-xxs-full-width voffset-b-5">
+                              <div class="container-fluid col-xs-pdn-both-0">
+                                 <div class="col-xs-12">
+                                    <div class="row">
+                                       <div class="front-items sp animated pulse slow hvr-overline-from-center" data-id='<?php echo $data_id; ?>'>
+                                          <div class="icon-wrap">
+                                             <a href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>"><img src="<?php echo ($row['upload_path'] != null) ? 'uploads/' . $row['upload_path'] : $row['cat_logo']; ?>" height="50" class="img-responsive" alt="<?php echo $row['cat_url_slug']; ?>"></a>
+                                          </div>
+                                          <div class="col-xs-12 col-lg-pdn-both-0 voffset-4">
+                                             <h1 class="text-smallcaps"><?php echo $row['cat_name']; ?></h1>
+                                          </div>
                                        </div>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                        </div>
-                        <!-- END -->
+                           <!-- END -->
                         <?php
                            $data_id += 1;
                         }
@@ -171,8 +162,7 @@ $canonical_url = WEB_HOST;
                         <a id="about-anchor"></a>
                         <a id="about"></a>
                         <div class="col-xs-12 col-sm-6">
-                           <div
-                              class="col-xs-12 voffset-2 front-welcome animated fadeInLeftShort hvr-underline-from-center">
+                           <div class="col-xs-12 voffset-2 front-welcome animated fadeInLeftShort hvr-underline-from-center">
                               <div class="col-xs-12 visible-xs voffset-1">&nbsp;</div>
                               <h3 class="text-uppercase voffset-2 text-bold">Company Profile</h3>
                               <p class="voffset-1">
@@ -196,10 +186,7 @@ $canonical_url = WEB_HOST;
                                  and of international standards with highest level of after-sales service.</p>
                            </div>
                            <div class="col-xs-12 voffset-4 text-center col-pdn-both-0">
-                              <a href="javascript:void(0);"
-                                 class="data_rent btn btn-primary hvr-underline-from-center voffset-3 square"
-                                 data-id="JFA Products and Services"><span
-                                    class="glyphicons glyphicons-message-plus"></span>&nbsp; Contact us for all
+                              <a href="javascript:void(0);" class="data_rent btn btn-primary hvr-underline-from-center voffset-3 square" data-id="JFA Products and Services"><span class="glyphicons glyphicons-message-plus"></span>&nbsp; Contact us for all
                                  your Solar needs</a>
                            </div>
                            <?php
@@ -224,26 +211,23 @@ $canonical_url = WEB_HOST;
                                  $result = $myCon->query($query);
                                  while ($row = mysqli_fetch_assoc($result)) {
                                  ?>
-                                 <div class="row">
-                                    <div class="col-xs-5 col-xxs-full-width">
-                                       <a
-                                          href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>">
-                                          <img src="<?php echo $row['cat_logo']; ?>" class="img-responsive img-center"
-                                             alt="<?php echo $row['custom_url']; ?>" />
-                                       </a>
-                                    </div>
-                                    <div class="col-xs-7 col-xxs-full-width col-xxs-text-center">
-                                       <div class="text-bold text-info">
-                                          <?php echo $row['cat_name']; ?>
+                                    <div class="row">
+                                       <div class="col-xs-5 col-xxs-full-width">
+                                          <a href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>">
+                                             <img src="<?php echo $row['cat_logo']; ?>" class="img-responsive img-center" alt="<?php echo $row['custom_url']; ?>" />
+                                          </a>
                                        </div>
-                                       <h5 class="text-bold voffset-1">
-                                          <?php echo $row['cat_title']; ?>
-                                       </h5>
-                                       <a href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>"
-                                          class="voffset-1"><?php echo $row['display_url']; ?></a>
+                                       <div class="col-xs-7 col-xxs-full-width col-xxs-text-center">
+                                          <div class="text-bold text-info">
+                                             <?php echo $row['cat_name']; ?>
+                                          </div>
+                                          <h5 class="text-bold voffset-1">
+                                             <?php echo $row['cat_title']; ?>
+                                          </h5>
+                                          <a href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>" class="voffset-1"><?php echo $row['display_url']; ?></a>
+                                       </div>
                                     </div>
-                                 </div>
-                                 <hr class="style-four" />
+                                    <hr class="style-four" />
                                  <?php } ?>
 
                               </div>
@@ -262,16 +246,12 @@ $canonical_url = WEB_HOST;
                <div class="contact-about col-xs-12" style="background-color: #ffffff99">
                   <h1>We'd Love to hear from You</h1>
                   <div class="col-xs-12 visible-xs voffset-1">&nbsp;</div>
-                  <h3 class="voffset-3 col-xs-12 col-sm-6 col-lg-4"
-                     style="text-shadow: 2px 2px 1px white, -5px -4px 3px white; "><span
-                        class="glyphicons glyphicons-iphone-shake"></span>
+                  <h3 class="voffset-3 col-xs-12 col-sm-6 col-lg-4" style="text-shadow: 2px 2px 1px white, -5px -4px 3px white; "><span class="glyphicons glyphicons-iphone-shake"></span>
                      <a href="tel:<?php echo $website["hotline"]; ?>">
                         <?php echo $website['hotline']; ?></a>
                   </h3>
-                  <h3 class="voffset-3 voffset-b-2 col-xs-12 col-sm-6 col-lg-4"
-                     style="text-shadow: 2px 2px 1px white, -5px -4px 3px white;">
-                     <span class="glyphicons glyphicons-envelope"></span> <a
-                        href="mailto:<?php echo $website["email"]; ?>"><?php echo $website["email"]; ?></a>
+                  <h3 class="voffset-3 voffset-b-2 col-xs-12 col-sm-6 col-lg-4" style="text-shadow: 2px 2px 1px white, -5px -4px 3px white;">
+                     <span class="glyphicons glyphicons-envelope"></span> <a href="mailto:<?php echo $website["email"]; ?>"><?php echo $website["email"]; ?></a>
                      <?php
                      if (isset($website["email2"]) && $website["email2"] != null) {
                         echo ', <a href="mailto:' . $website["email2"] . '">' . $website["email2"] . '</a>';
@@ -281,41 +261,35 @@ $canonical_url = WEB_HOST;
                   <div class="col-xs-12 visible-xs voffset-1">&nbsp;</div>
                   <div class="voffset-1 col-xs-12 col-lg-4 media-64 theme-1 reverse">
                      <?php if ($website["fb"] != null) { ?>
-                     <a href="<?php echo $website["fb"]; ?>" target="_blank" data-toggle="tooltip"
-                        data-placement="bottom" title="Like us on Facebook">
-                        <div class="media-icn top fb"></div>
-                     </a>
+                        <a href="<?php echo $website["fb"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Like us on Facebook">
+                           <div class="media-icn top fb"></div>
+                        </a>
                      <?php }
                      if ($website["tw"] != null) { ?>
-                     <a href="<?php echo $website["tw"]; ?>" target="_blank" data-toggle="tooltip"
-                        data-placement="bottom" title="Follow us on Twitter">
-                        <div class="media-icn top tw"></div>
-                     </a>
+                        <a href="<?php echo $website["tw"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Follow us on Twitter">
+                           <div class="media-icn top tw"></div>
+                        </a>
                      <?php }
                      if ($website["gplus"] != null) { ?>
-                     <a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip"
-                        data-placement="bottom" title="Follow on Google Plus">
-                        <div class="media-icn top gp"></div>
-                     </a>
+                        <a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Follow on Google Plus">
+                           <div class="media-icn top gp"></div>
+                        </a>
                      <?php }
                      if ($website["yt"] != null) { ?>
-                     <a href="<?php echo $website["yt"]; ?>" target="_blank" data-toggle="tooltip"
-                        data-placement="bottom" title="Watch us on YouTube">
-                        <div class="media-icn top ut"></div>
-                     </a>
+                        <a href="<?php echo $website["yt"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Watch us on YouTube">
+                           <div class="media-icn top ut"></div>
+                        </a>
                      <?php }
                      if ($website["pint"] != null) { ?>
-                     <a href="<?php echo $website["pint"]; ?>" target="_blank" data-toggle="tooltip"
-                        data-placement="bottom" title="Follow us on Pinterest">
-                        <div class="media-icn top pr"></div>
-                     </a>
+                        <a href="<?php echo $website["pint"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Follow us on Pinterest">
+                           <div class="media-icn top pr"></div>
+                        </a>
                      <?php } ?>
                   </div>
                   <div class="col-xs-12 visible-xs voffset-1">&nbsp;</div>
                   <h4 class="voffset-2 col-xs-12">Questions about our products?</h4>
                   <div class="col-xs-12 voffset-b-3 text-center">
-                     <button class="data_rent btn btn-default btn-lg square voffset-2"
-                        data-id="JFA Products and Services">Contact Our Sales Team</button>
+                     <button class="data_rent btn btn-default btn-lg square voffset-2" data-id="JFA Products and Services">Contact Our Sales Team</button>
                   </div>
                </div>
             </div>
@@ -325,19 +299,19 @@ $canonical_url = WEB_HOST;
    </div>
 </body>
 <script>
-$(window).resize(function() {
-   setTimeout(function() {
-      if ($(window).width() < 768) {
-         $(".lefttitle").css("height", (100) + 'px');
-         $(".slider-btn").css("height", (100) + 'px');
-         $(".leftcontent").hide();
-      } else {
-         $(".lefttitle").css("height", (55) + 'px');
-         $(".slider-btn").css("height", (55) + 'px');
-         $(".leftcontent").show();
-      }
-   }, 500);
-});
+   $(window).resize(function() {
+      setTimeout(function() {
+         if ($(window).width() < 768) {
+            $(".lefttitle").css("height", (100) + 'px');
+            $(".slider-btn").css("height", (100) + 'px');
+            $(".leftcontent").hide();
+         } else {
+            $(".lefttitle").css("height", (55) + 'px');
+            $(".slider-btn").css("height", (55) + 'px');
+            $(".leftcontent").show();
+         }
+      }, 500);
+   });
 </script>
 
 </html>
