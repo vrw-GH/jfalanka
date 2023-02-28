@@ -4,9 +4,10 @@
          <div
             class="col-xs-12 col-sm-4 col-md-4 col-lg-3 side-menu dark-color text-center text-center col-xs-text-center col-xxs-text-center">
             <div class="voffset-b-5">&nbsp;</div>
-            <a href="<?php echo WEB_HOST ?>/home.php#"><img
-                  src="<?php echo WEB_HOST ?>/resources/images/logo-footer.png" alt="<?php echo $website['domain']; ?>"
-                  class="img-responsive img-center" /></a>
+            <a href="home.php#">
+               <img src="<?= $website['logo']; ?>" alt="<?php echo $website['domain']; ?>"
+                  class="img-responsive img-center" />
+            </a>
             <ul class="listnone text-center voffset-5">
                <li class="h2">Hotline</li>
                <li><?php echo $website['hotline']; ?></li>
@@ -25,12 +26,12 @@
                <li><a href="#" class="scrollme">Home</a></li>
                <li><a href="#about">About Us</a></li>
                <li><a href="#contact_link">Contact Us</a></li>
-               <li><a href="<?= SITE2[0] ?>/page/opportunities">Careers & Business Opportunities</a></li>
+               <li><a href="pages/opportunities">Careers & Business Opportunities</a></li>
             </ul>
          </div>
          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 side-menu">
             <ul class="listnone">
-               <li class="h1">JFA Products & Services</li>
+               <li class="h1"><?= $website['abbrev'] ?> Products & Services</li>
                <?php
                $query = "SELECT * FROM item_main_category WHERE active = 1 ORDER BY cat_order ASC";
                $result = $myCon->query($query);
@@ -52,26 +53,26 @@
                      title="Like us on Facebook">
                      <div class="media-icn top fb"></div> Like us on Facebook
                   </a></li>
-               <?php }
-               if ($website["tw"] != null) { ?>
+               <?php } ?>
+               <?php if ($website["tw"] != null) { ?>
                <li><a href="<?php echo $website["tw"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom"
                      title="Follow us on Twitter">
                      <div class="media-icn top tw"></div> Follow us on Twitter
                   </a></li>
-               <?php }
-               if ($website["pint"] != null) { ?>
+               <?php } ?>
+               <?php if ($website["pint"] != null) { ?>
                <li><a href="<?php echo $website["pint"]; ?>" target="_blank" data-toggle="tooltip"
                      data-placement="bottom" title="Follow on Pinterest">
                      <div class="media-icn top pr"></div> Follow on Pinterest
                   </a></li>
-               <?php }
-               if ($website["gplus"] != null) { ?>
+               <?php } ?>
+               <?php if ($website["gplus"] != null) { ?>
                <li><a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip"
                      data-placement="bottom" title="Follow on Google Plus">
                      <div class="media-icn top gp"></div> Follow on Google Plus
                   </a></li>
-               <?php }
-               if ($website["yt"] != null) { ?>
+               <?php } ?>
+               <?php if ($website["yt"] != null) { ?>
                <li><a href="<?php echo $website["yt"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom"
                      title="Watch us on YouTube">
                      <div class="media-icn top ut"></div> Watch us on YouTube

@@ -1,4 +1,11 @@
 /* CSS Document */
+:root {
+    --comp-color       : #0f447f;
+    --comp-color-mild  : #1c5090;
+    --comp-color-strong: #004484;
+    --comp-color-dark  : #003260;
+}
+
 @charset "utf-8";
 
 html,
@@ -628,14 +635,14 @@ hr.style-four {
 }
 
 #wrapper #header {
-    width          : 100%;
-    display        : block;
-    overflow       : visible;
-    background     : #fff;
-    background-size: 100%;
-    border-bottom  : #bcd4ef 1px solid;
-    background     : url(../images/header-bg.jpg) right center no-repeat;
-    background-size: auto 100%;
+    width             : 100%;
+    display           : block;
+    overflow          : visible;
+    background        : #fff;
+    background-size   : 100%;
+    border-bottom     : #bcd4ef 1px solid;
+    /* background     : url(../images/header-bg.jpg) right center no-repeat; */
+    background-size   : auto 100%;
 }
 
 .top-abs-logo {
@@ -656,7 +663,8 @@ hr.style-four {
 }
 
 #wrapper #header .top-hd-layer {
-    background: #1c5191;
+    /* background: #1c5191; */
+    background: var(--comp-color-mild);
 }
 
 #wrapper #header .top-hd-layer ul {
@@ -1483,14 +1491,15 @@ hr.style-four {
 
 .container h1,
 .container-fluid h1 {
-    width      : 100%;
-    height     : auto;
-    overflow   : hidden;
-    margin     : 0 auto;
-    font-size  : 27px;
-    line-height: 30px;
-    color      : #0f447f;
-    text-shadow: 0px 0px 1px rgba(15, 68, 127, 0.4);
+    width         : 100%;
+    height        : auto;
+    overflow      : hidden;
+    margin        : 0 auto;
+    font-size     : 27px;
+    line-height   : 30px;
+    /* color      : #0f447f; */
+    color         : var(--comp-color);
+    text-shadow   : 0px 0px 1px rgba(15, 68, 127, 0.4);
 }
 
 .container h2,
@@ -1610,7 +1619,9 @@ hr.style-four {
 }
 
 .front-items.sp img {
-    border-bottom: #9ac9f1 1px solid;
+    /* border-bottom: #9ac9f1 1px solid; */
+    width       : 100vw;
+    aspect-ratio: 1 / 1;
 }
 
 /* Carousel STRAT -------------- */
@@ -1735,6 +1746,7 @@ hr.style-four {
 }
 
 /* Front Carousel END ----------- */
+
 /* front-jumbo-box START ------------ */
 .front-jumbo-box {
     width                  : 100%;
@@ -1853,6 +1865,7 @@ hr.style-four {
 }
 
 /* front-jumbo-box END ------------ */
+
 /* front-contact-box START ------------ */
 #front-contact-box {
     width        : 100%;
@@ -2561,12 +2574,13 @@ p#SkypeButton_Call_paraElement {
 /* Registration END --------------------------------------- */
 /* footer --------------------------------------- */
 #footer {
-    width     : 100%;
-    min-height: 50px;
-    overflow  : hidden;
-    display   : block;
-    margin    : 0 auto;
-    background: #004484;
+    width        : 100%;
+    min-height   : 50px;
+    overflow     : hidden;
+    display      : block;
+    margin       : 0 auto;
+    /* background: #004484; */
+    background   : var(--comp-color-strong);
 }
 
 #footer .side-menu ul {
@@ -2579,7 +2593,9 @@ p#SkypeButton_Call_paraElement {
 
 #footer .side-menu ul.dark-color,
 #footer .side-menu.dark-color {
-    background: #003260;
+    /* background: #003260; */
+    background: var(--comp-color-dark);
+
 }
 
 #footer .side-menu ul.last {
@@ -2641,13 +2657,14 @@ p#SkypeButton_Call_paraElement {
 }
 
 #footer .copyright {
-    width      : 100%;
-    background : #003260;
-    overflow   : hidden;
-    font-size  : 15px;
-    color      : #aaa;
-    text-shadow: 0 0 1px rgba(50, 50, 50, .1);
-    line-height: 25px;
+    width         : 100%;
+    /* background : #003260; */
+    background    : var(--comp-color-mild);
+    overflow      : hidden;
+    font-size     : 15px;
+    color         : #aaa;
+    text-shadow   : 0 0 1px rgba(50, 50, 50, .1);
+    line-height   : 25px;
 }
 
 #footer .copyright .text-right {
@@ -3362,3 +3379,8 @@ p#SkypeButton_Call_paraElement {
 }
 
 /* ---------------------- END --------------------------- */
+
+.comp-logo {
+    background-color   : var(--comp-color);
+    /* border          : 2px solid red; */
+}
