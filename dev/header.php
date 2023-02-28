@@ -25,12 +25,14 @@ $enObj = new encryption();
                         <li><a href="#about" class="scrollme">About Us</a></li>
 
                         <li><span class="glyphicons glyphicons-iphone"></span>
-                           <a href="tel:<?php echo $website["hotline"]; ?>">
+                           <a href="tel:<?php echo $website["hotline"]; ?>" data-toggle="tooltip"
+                              data-placement="bottom" title="Opens Phone App">
                               <?php echo $website['hotline']; ?></a>
                         </li>
 
                         <li><span class="glyphicons glyphicons-envelope"></span>
-                           <a href="mailto:<?php echo $website["email"]; ?>">
+                           <a href="mailto:<?php echo $website["email"]; ?>" data-toggle="tooltip"
+                              data-placement="bottom" title="Opens eMail App">
                               <?php echo $website['email']; ?></a>
                         </li>
 
@@ -41,32 +43,32 @@ $enObj = new encryption();
 
                         <?php if ($website["fb"] != null) { ?>
                         <li><a href="<?php echo $website["fb"]; ?>" target="_blank" data-toggle="tooltip"
-                              data-placement="bottom" title="Like us on Facebook" class="scrollme">
-                              <img src="../../jfalanka/dev/resources/images/social_fb_24x24_5_cr.png">
+                              data-placement="bottom" title="Like us on Facebook" class="scrollme" height="50px">
+                              <img src="./resources/images/social_fb_24x24_5_cr.png">
                            </a></li>
                         <?php } ?>
                         <?php if ($website["tw"] != null) { ?>
                         <li><a href="<?php echo $website["tw"]; ?>" target="_blank" data-toggle="tooltip"
                               data-placement="bottom" title="Follow us on Twitter" class="scrollme"><img
-                                 src="../../jfalanka/dev/resources/images/social_tw_24x24_5_cr.png">
+                                 src="./resources/images/social_tw_24x24_5_cr.png">
                            </a> </li>
                         <?php } ?>
                         <?php if ($website["gplus"] != null) { ?>
                         <li><a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip"
                               data-placement="bottom" title="Follow on Google Plus" class="scrollme">
-                              <img src="../../jfalanka/dev/resources/images/social_gp_24x24_5_cr.png">
+                              <img src="./resources/images/social_gp_24x24_5_cr.png">
                            </a> </li>
                         <?php } ?>
                         <?php if ($website["yt"] != null) { ?>
                         <li> <a href="<?php echo $website["yt"]; ?>" target="_blank" data-toggle="tooltip"
                               data-placement="bottom" title="Watch us on YouTube" class="scrollme"><img
-                                 src="../../jfalanka/dev/resources/images/social_yt_24x24_5_cr.png">
+                                 src="./resources/images/social_yt_24x24_5_cr.png">
                            </a></li>
                         <?php } ?>
                         <?php if ($website["pint"] != null) { ?>
                         <li> <a href="<?php echo $website["pint"]; ?>" target="_blank" data-toggle="tooltip"
                               data-placement="bottom" title="Follow us on Pinterest" class="scrollme"><img
-                                 src="../../jfalanka/dev/resources/images/social_pi_24x24_5_cr.png">
+                                 src="./resources/images/social_pi_24x24_5_cr.png">
                            </a></li>
                         <?php } ?>
 
