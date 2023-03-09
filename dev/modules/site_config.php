@@ -7,53 +7,75 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+$systemdate = date('Y-m-d');
+$pid = 1;
+/* --------------------------------------------------------------------
+ * Resource URLS
+ */
+$website['admin_folder']             = 'admin';
+$website['models_folder']            = 'models';
+$website['uploads_folder']           = 'uploads';
+$website['downloads_folder']         = 'downloads';
+$website['images_folder']            = 'resources/images';
+$website['bootstrap_folder']         = 'resources/bootstrap-3.3.7';
+$website['captcha_folder']           = 'modules/simple_captcha';
+$website['jquery_min_js']            = 'resources/js/jquery-3.1.1.min.js';
+$website['jquery_migrate_js']        = 'resources/js/jquery-migrate-3.0.0.min.js';
+$website['jquery_migrate_lower_js']  = 'resources/js/jquery-migrate-1.4.1.min.js';
+$website['jquery_ui_css']            = 'resources/css/jquery-ui.min.css';
+$website['jquery_ui_js']             = 'resources/js/jquery-ui.min.js';
+$website['jquery_ui_theme_css']      = 'resources/css/jquery-ui.theme.min.css';
+$website['jquery_ui_structure_css']  = 'resources/css/jquery-ui.structure.min.css';
+$website['masonry_pkgd_min_js']      = 'resources/js/masonry.pkgd.min.js';
+$website['imagesloaded_pkgd_min_js'] = 'resources/js/imagesloaded.pkgd.min.js';
+
+
 /* --------------------------------------------------------------------
  * Production and Dev Customizations
  */
-if (file_exists('.localDevOnly/dev-definitions.php')) {
+if (file_exists('../.localDevOnly/dev-definitions.php')) {
     /* Use Local (Dev)  
      ! (keep here, even it is called in index.php due to iframe)
      * This file sets up "DEV environment" on the local system only
      * but should not affect LIVE server.
+     * Also loads the DEBUGGING (cLog) system.
      ! - do **NOT** copy ".localDevOnly" folder to LIVE site!
      */
-    include_once '.localDevOnly/dev-definitions.php';
+    include_once '../.localDevOnly/dev-definitions.php';
 }
 // include .ENV file
-// * (wont overwrite if already defined)
-include_once 'modules/get-dotenvs.php';
+// * (wont overwrite if already defined) - ie in dev-definitions.php
+include_once 'get-dotenvs.php';
+function cLog($a)
+{
+    (function_exists("cLogger")) ? cLogger($a) : null;
+};
 // 
 define(
     'SITE_DEV',
     ["http://wrightsdesk.com", "Redesign(2023): The Leisure Co."]
 );
-if (!defined('ADMIN'))     define('ADMIN', 'admin');
+define('LOCAL',  $_SERVER['SERVER_NAME'] == "localhost"); /* true/false */
 if (!defined('WEB_HOST'))  define('WEB_HOST', 'http://www.jfalanka.com');
 /* Site URLs for .htaccess UrlReWrite (without end /) */
-define('LOCAL',  $_SERVER['SERVER_NAME'] == "localhost"); /* true/false */
+$canonical_url = WEB_HOST;
 
 /* --------------------------------------------------------------------
  * include admin configuration file
  */
-if (file_exists(ADMIN . '/admin_config.php')) {
-    include_once ADMIN . '/admin_config.php';
-} else if (file_exists('../' . ADMIN . '/admin_config.php')) {
-    include_once '../' . ADMIN . '/admin_config.php';
-} else if (file_exists('../../' . ADMIN . '/admin_config.php')) {
-    include_once '../../' . ADMIN . '/admin_config.php';
+if (file_exists('../' . $website["admin_folder"] . '/admin_config.php')) {
+    include_once '../' . $website["admin_folder"] . '/admin_config.php';
 } else {
-    include_once WEB_HOST . '/' . ADMIN . '/admin_config.php';
+    include_once WEB_HOST . '/' . $website["admin_folder"] . '/admin_config.php';
 }
 
 /* --------------------------------------------------------------------
  * Database Connection
  */
-if (file_exists('./models/dbConfig.php')) {
-    include_once './models/dbConfig.php';
-} else if (file_exists('../models/dbConfig.php')) {
-    include_once '../models/dbConfig.php';
+if (file_exists('../' . $website["models_folder"] . '/dbConfig.php')) {
+    include_once '../' . $website["models_folder"] . '/dbConfig.php';
 } else {
-    include_once WEB_HOST . '/models/dbConfig.php';
+    include_once WEB_HOST . '/' . $website["models_folder"] . '/dbConfig.php';
 }
 $myCon = new dbConfig();
 $myCon->connect();
@@ -61,12 +83,10 @@ $myCon->connect();
 /* --------------------------------------------------------------------
  * Encryption
  */
-if (file_exists('./models/encryption.php')) {
-    include_once './models/encryption.php';
-} else if (file_exists('../models/encryption.php')) {
-    include_once '../models/encryption.php';
+if (file_exists('../' . $website["models_folder"] . '/encryption.php')) {
+    include_once '../' . $website["models_folder"] . '/encryption.php';
 } else {
-    include_once WEB_HOST . '/models/encryption.php';
+    include_once WEB_HOST . '/' . $website["models_folder"] . '/encryption.php';
 }
 $encObj = new encryption();
 
@@ -123,29 +143,14 @@ if (!defined('REC_EMAIL'))  define('REC_EMAIL', $website['email']);
  * og prefix
  */
 define('SITE_SEO', $encObj->decode(SITE_SEO_KEY));
-
-/* --------------------------------------------------------------------
- * og prefix
- */
 define('OG_PRIFIX', 'prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"');
-
-/* --------------------------------------------------------------------
- * Jqury & Boostrap URLS
- */
-$website['boostrap_folder']         = 'resources/bootstrap-3.3.7';
-$website['jquery_min_js']           = 'resources/js/jquery-3.1.1.min.js';
-$website['jquery_migrate_js']       = 'resources/js/jquery-migrate-3.0.0.min.js';
-$website['jquery_migrate_lower_js'] = 'resources/js/jquery-migrate-1.4.1.min.js';
-$website['jquery_ui_css']           = 'resources/css/jquery-ui.min.css';
-$website['jquery_ui_js']            = 'resources/js/jquery-ui.min.js';
-$website['jquery_ui_theme_css']     = 'resources/css/jquery-ui.theme.min.css';
-$website['jquery_ui_structure_css'] = 'resources/css/jquery-ui.structure.min.css';
 
 /* --------------------------------------------------------------------
  * Domain info/URLS
  */
 $domain['base_dir']
     = __DIR__; /* Absolute path to your installation, ex: /var/www/mywebsite  or C:\wamp\www\mywebsite */
+
 $domain['doc_root']
     = preg_replace("!{$_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);  /* ex: /var/www */
 $f = "/" . basename($_SERVER['SCRIPT_FILENAME']);
@@ -161,7 +166,12 @@ $domain['disp_port']
 $domain['domain']
     = $_SERVER['SERVER_NAME'];
 $domain['full_url']
-    = $domain['protocol'] . "://" . $domain['domain'] . $domain['disp_port'] . $domain['base_url']; /* Ex: 'http://example.com', 'https://example.com/mywebsite', etc. */
+    = $domain['protocol'] . "://" . $domain['domain'] . $domain['disp_port'] . $domain['base_url']; /* Ex: 'http://example.com', 'https://example.com/    mywebsite', etc. */
 
-// echo "<script>console.log('Site config loaded.');</script>";
-// echo "<script>console.log('domain info/urls " . json_encode($domain) . "')</script>";
+cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");
+$constants = get_defined_constants(true)['user'];
+cLog($constants);
+cLog($website);
+cLog($config);
+cLog($domain);
+cLog($pageinfo);

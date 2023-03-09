@@ -22,7 +22,6 @@ class getDotEnvs
     */
    protected $path;
 
-
    public function __construct(string $path)
    {
       try {
@@ -65,3 +64,5 @@ class getDotEnvs
       }
    }
 }
+
+cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");

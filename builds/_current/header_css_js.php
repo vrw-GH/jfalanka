@@ -186,3 +186,5 @@ if (SITE_SEO != 'basic' && $seo_google == true) {
 <script>
    // console.log('header_css_js loaded.');
 </script>
+
+<?= cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>

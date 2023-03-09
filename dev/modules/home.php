@@ -1,4 +1,5 @@
 <?php
+$pageinfo = json_decode($_GET['pageinfo']); // GET from index.php (re-check in site_config)
 
 function gzip_output()
 {
@@ -34,11 +35,7 @@ ob_implicit_flush(0);
 /* Then do everything you want to do on the page */
 
 include_once 'site_config.php';
-
-$systemdate = date('Y-m-d');
-$pid = 1;
-$canonical_url = WEB_HOST;
-
+$pageinfo->title = ($pageinfo->mode != "live") ? $pageinfo->title : $config['seo']['seo_title'];
 ?>
 
 <!DOCTYPE html>
@@ -53,21 +50,23 @@ $canonical_url = WEB_HOST;
    <meta name="description" content="<?php echo $config['seo']['seo_dscp'] ?>">
    <meta name="keywords" content="<?php echo $config['seo']['seo_keywords'] ?>">
    <meta name="robots" content="index,follow">
-   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=1"> -->
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <!-- <link rel="icon" href="resources/images/favicon.png" type="image/png"> -->
-   <title><?php echo $config['seo']['seo_title']; ?></title>
+
+   <title><?php echo $pageinfo->title; ?></title>
 
    <?php
    /* enable google analytics */
    $seo_social = true;
    $seo_google = true;
-   include_once 'header_css_js.php';
    ?>
-   <link rel="stylesheet" href="resources/css/style.css" type="text/css" media="all" />
+   <?php include_once 'header_css_js.php'; ?>
+
+   <link rel="stylesheet" href="../resources/css/style.css" type="text/css" media="all" />
 </head>
 
 <body>
+   <?= $pageinfo->tagline ?>
+
    <div id="wrapper">
       <div id="container">
          <?php include_once './header.php'; ?>
@@ -80,7 +79,7 @@ $canonical_url = WEB_HOST;
                         <div class="col-xs-12 voffset-2 visible-xs">&nbsp;</div>
 
                         <a href="<?= WEB_HOST ?>">
-                           <img src="resources/images/logo-jfa.png"
+                           <img src="../<?= $website['images_folder'] ?>/<?= $website['logo'] ?>"
                               class="comp-logo img-responsive img-center animated fadeInUpShort"
                               alt="<?= $website['abbrev'] ?>_logo" />
                         </a>
@@ -104,7 +103,7 @@ $canonical_url = WEB_HOST;
                            </g>
                         </svg>
 
-                        <!-- <img src="resources/images/30yrAnniv5.png"
+                        <!-- <img src="../resources/images/30yrAnniv5.png"
                            class="img-responsive img-center animated fadeInUpShort" alt="JFA" /> -->
                      </div>
                      <div class="row animatedParent animateOnce" data-sequence='500'>
@@ -130,6 +129,8 @@ $canonical_url = WEB_HOST;
                            } else {
                               $colum = '';
                            }
+                           // -----------------                       
+
                         ?>
 
                         <!-- START -->
@@ -142,11 +143,12 @@ $canonical_url = WEB_HOST;
                                        data-id='<?php echo $data_id; ?>'>
                                        <div class="icon-wrap">
                                           <a
-                                             href="<?php echo (LOCAL) ? SITES[$row['cat_order']] : $row['custom_url']; ?>">
+                                             href="<?php echo (defined(LOCAL)) ? SITES[$row['cat_order']] : $row['custom_url']; ?>">
                                              <img
-                                                src="<?php echo ($row['upload_path'] != null) ? 'uploads/' . $row['upload_path'] : $row['cat_logo']; ?>"
-                                                class="img-responsive" alt="<?php echo $row['cat_url_slug']; ?>" </a>
-                                             <!-- style="height:171px" -->
+                                                src="../<?php echo ($row['upload_path'] != null) ? 'uploads/' . $row['upload_path'] : $website['images_folder'] . '/' . $row['cat_logo']; ?>"
+                                                class="img-responsive" alt="<?php echo $row['cat_url_slug']; ?>">
+                                          </a>
+
                                        </div>
                                        <div class="col-xs-12 col-lg-pdn-both-0 voffset-10 ">
                                           <h1 class="text-smallcaps"><?php echo $row['cat_name']; ?></h1>
@@ -184,8 +186,14 @@ $canonical_url = WEB_HOST;
                         <a id="about"></a>
                         <div class="col-xs-12 col-sm-6">
                            <div
-                              class="col-xs-12 voffset-2 front-welcome animated fadeInLeftShort hvr-underline-from-center">
+                              class="col-xs-12 voffset-2 front-welcome animated fadeInLeftShort xx(hvr-underline-from-center)">
                               <div class="col-xs-12 visible-xs voffset-1">&nbsp;</div>
+                              <img src="../<?= $website['images_folder'] ?>/<?= $website['logo']; ?>"
+                                 class="comp-logo img-responsive img-center" alt="<?= $website['abbrev'] ?>" />
+                              <div class="text-bold text-info text-center">
+                                 <?= $website['site_name'] ?>
+                              </div>
+                              <hr class="style-four" />
                               <h3 class="text-uppercase voffset-2 text-bold">Company Profile</h3>
                               <p class="voffset-1"><?= $website['profile'] ?>
                               </p>
@@ -195,13 +203,13 @@ $canonical_url = WEB_HOST;
                               <h3 class="text-uppercase text-bold voffset-8">Our Mission</h3>
                               <p class="voffset-1"><?= $website['mission'] ?></p>
                            </div>
-                           <div class="col-xs-12 voffset-4 text-center col-pdn-both-0">
+                           <!-- <div class="col-xs-12 voffset-4 text-center col-pdn-both-0">
                               <a href="javascript:void(0);"
                                  class="data_rent btn btn-primary hvr-underline-from-center voffset-3 square"
                                  data-id="JFA Products and Services">
                                  <span class="glyphicons glyphicons-message-plus"> </span>
-                                 &nbsp; Contact us for all your Solar needs</a>
-                           </div>
+                                 &nbsp; Contact us for all your requirements</a>
+                           </div> -->
                            <?php
                            include_once './quick-form.php';
                            ?>
@@ -210,16 +218,9 @@ $canonical_url = WEB_HOST;
                         <div class="col-xs-12 col-sm-6 animated fadeInRightShort">
                            <div class="col-xs-12 col-xxs-pdn-both-0 voffset-b-4">
                               <div class="col-xs-12 voffset-2 visible-lg">&nbsp;</div>
-                              <!-- <a href="<?= WEB_HOST ?>/home.php#"> -->
-                              <img src="<?= $website['logo']; ?>" class="comp-logo img-responsive img-center"
-                                 alt="<?= $website['abbrev'] ?>" />
-                              <!-- </a> -->
-                              <div class="text-bold text-info text-center">
-                                 <?= $website['site_name'] ?>
-                              </div>
+
                               <div class="col-xs-12 col-pdn-both-0 voffset-2">
                                  <hr class="style-four" />
-
                                  <?php
                                  $query = "SELECT * FROM item_main_category WHERE active = 1 ORDER BY cat_order ASC";
                                  $result = $myCon->query($query);
@@ -229,7 +230,8 @@ $canonical_url = WEB_HOST;
                                     href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>">
                                     <div class="row">
                                        <div class="col-xs-5 col-xxs-full-width">
-                                          <img src="<?php echo $row['cat_logo']; ?>" class="img-responsive img-center"
+                                          <img src="../<?= $website['images_folder'] ?>/<?php echo $row['cat_logo']; ?>"
+                                             class="img-responsive img-center"
                                              alt="<?php echo $row['custom_url']; ?>" />
                                        </div>
                                        <div class="col-xs-7 col-xxs-full-width col-xxs-text-center">
@@ -255,10 +257,11 @@ $canonical_url = WEB_HOST;
             </div>
          </div>
          <!-- END of Other -->
+         <a id="contact_link-anchor"></a>
+         <a id="contact_link"></a>
          <div class="container-fluid bg2">
+
             <div class="row">
-               <a id="contact_link-anchor"></a>
-               <a id="contact_link"></a>
                <div class="contact-about col-xs-12" style="background-color: #ffffff99">
                   <h1>We'd Love to hear from You</h1>
                   <div class="col-xs-12 visible-xs voffset-1">&nbsp;</div>
@@ -314,10 +317,10 @@ $canonical_url = WEB_HOST;
                      <?php } ?>
                   </div>
                   <div class="col-xs-12 visible-xs voffset-1">&nbsp;</div>
-                  <h4 class="voffset-2 col-xs-12">Questions about our products?</h4>
+                  <!-- <h4 class="voffset-2 col-xs-12">Questions about our products?</h4> -->
                   <div class="col-xs-12 voffset-b-3 text-center">
                      <button class="data_rent btn btn-default btn-lg square voffset-2"
-                        data-id="JFA Products and Services">Contact Our Sales Team</button>
+                        data-id="JFA Products and Services">Contact Us Directly</button>
                   </div>
                </div>
             </div>
@@ -343,6 +346,8 @@ $(window).resize(function() {
 </script>
 
 </html>
+
+
 <?php
 /* Call this function to output everything as gzipped content. */
 
@@ -350,7 +355,7 @@ $(window).resize(function() {
 //                                                <div class="row">
 //                                                    <div class="col-xs-5 col-xxs-full-width">
 //                                                        <a href="http://tropicalvillas.lk" target="_blank">
-//                                                            <img src="resources/images/tropicalvillas-logo.jpg" class="img-responsive img-center" alt="www.tropicalvillas.lk"/>
+//                                                            <img src="../resources/images/tropicalvillas-logo.jpg" class="img-responsive img-center" alt="www.tropicalvillas.lk"/>
 //                                                        </a>
 //                                                    </div>
 //                                                    <div class="col-xs-7 col-xxs-full-width col-xxs-text-center">
@@ -368,3 +373,5 @@ $(window).resize(function() {
 
 gzip_output();
 ?>
+
+<?= cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>
