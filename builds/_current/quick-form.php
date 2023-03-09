@@ -396,3 +396,5 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
 <?php
 /* captcha code */
 $_SESSION['captcha'] = captcha();
+
+cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>

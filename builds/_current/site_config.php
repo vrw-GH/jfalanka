@@ -7,6 +7,9 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+$systemdate = date('Y-m-d');
+$pid = 1;
+
 /* --------------------------------------------------------------------
  * Production and Dev Customizations
  */
@@ -15,13 +18,19 @@ if (file_exists('.localDevOnly/dev-definitions.php')) {
      ! (keep here, even it is called in index.php due to iframe)
      * This file sets up "DEV environment" on the local system only
      * but should not affect LIVE server.
+     * Also loads the DEBUGGING (cLog) system.
      ! - do **NOT** copy ".localDevOnly" folder to LIVE site!
      */
     include_once '.localDevOnly/dev-definitions.php';
 }
 // include .ENV file
-// * (wont overwrite if already defined)
+// * (wont overwrite if already defined) - ie in dev-definitions.php
 include_once 'modules/get-dotenvs.php';
+function cLog($a)
+{
+    (function_exists("cLogger")) ? cLogger($a) : null;
+};
+
 // 
 define(
     'SITE_DEV',
@@ -31,6 +40,7 @@ if (!defined('ADMIN'))     define('ADMIN', 'admin');
 if (!defined('WEB_HOST'))  define('WEB_HOST', 'http://www.jfalanka.com');
 /* Site URLs for .htaccess UrlReWrite (without end /) */
 define('LOCAL',  $_SERVER['SERVER_NAME'] == "localhost"); /* true/false */
+$canonical_url = WEB_HOST;
 
 /* --------------------------------------------------------------------
  * include admin configuration file
@@ -146,22 +156,33 @@ $website['jquery_ui_structure_css'] = 'resources/css/jquery-ui.structure.min.css
  */
 $domain['base_dir']
     = __DIR__; /* Absolute path to your installation, ex: /var/www/mywebsite  or C:\wamp\www\mywebsite */
+
 $domain['doc_root']
     = preg_replace("!{$_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);  /* ex: /var/www */
+
 $f = "/" . basename($_SERVER['SCRIPT_FILENAME']);
 $a = preg_replace("!^{$domain['doc_root']}!", '', $_SERVER['SCRIPT_FILENAME']);
 $domain['base_url']
     = preg_replace("!{$f}$!", '', $a); /* '' or '/mywebsite' */
+
 $domain['protocol']
     = empty($_SERVER['HTTPS']) ? 'http' : 'https';
+
 $domain['port']
     = $_SERVER['SERVER_PORT'];
+
 $domain['disp_port']
     = ($domain['protocol'] == 'http' && $domain['port'] == 80 || $domain['protocol'] == 'https' && $domain['port'] == 443) ? '' : ":" . $domain['port'];
+
 $domain['domain']
     = $_SERVER['SERVER_NAME'];
-$domain['full_url']
-    = $domain['protocol'] . "://" . $domain['domain'] . $domain['disp_port'] . $domain['base_url']; /* Ex: 'http://example.com', 'https://example.com/mywebsite', etc. */
 
-// echo "<script>console.log('Site config loaded.');</script>";
-// echo "<script>console.log('domain info/urls " . json_encode($domain) . "')</script>";
+$domain['full_url']
+    = $domain['protocol'] . "://" . $domain['domain'] . $domain['disp_port'] . $domain['base_url']; /* Ex: 'http://example.com', 'https://example.com/    mywebsite', etc. */
+
+cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");
+$constants = get_defined_constants(true)['user'];
+cLog($constants);
+cLog($website);
+cLog($config);
+cLog($domain);

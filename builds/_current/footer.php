@@ -1,12 +1,10 @@
 <div id="footer">
    <div class="container">
       <div class="row">
-         <div
-            class="col-xs-12 col-sm-4 col-md-4 col-lg-3 side-menu dark-color text-center text-center col-xs-text-center col-xxs-text-center">
+         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 side-menu dark-color text-center text-center col-xs-text-center col-xxs-text-center">
             <div class="voffset-b-5">&nbsp;</div>
             <a href="home.php#">
-               <img src="<?= $website['logo']; ?>" alt="<?php echo $website['domain']; ?>"
-                  class="img-responsive img-center" />
+               <img src="<?= $website['logo']; ?>" alt="<?php echo $website['domain']; ?>" class="img-responsive img-center" />
             </a>
             <ul class="listnone text-center voffset-5">
                <li class="h2">Hotline</li>
@@ -37,9 +35,8 @@
                $result = $myCon->query($query);
                while ($row = mysqli_fetch_assoc($result)) {
                ?>
-               <li><a
-                     href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>"><?php echo $row['cat_name']; ?></a>
-               </li>
+                  <li><a href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>"><?php echo $row['cat_name']; ?></a>
+                  </li>
                <?php } ?>
             </ul>
          </div>
@@ -49,34 +46,29 @@
             </ul>
             <ul class="listnone media-24 theme-5 reverse withlabel">
                <?php if ($website["fb"] != null) { ?>
-               <li><a href="<?php echo $website["fb"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom"
-                     title="Like us on Facebook">
-                     <div class="media-icn top fb"></div> Like us on Facebook
-                  </a></li>
+                  <li><a href="<?php echo $website["fb"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Like us on Facebook">
+                        <div class="media-icn top fb"></div> Like us on Facebook
+                     </a></li>
                <?php } ?>
                <?php if ($website["tw"] != null) { ?>
-               <li><a href="<?php echo $website["tw"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom"
-                     title="Follow us on Twitter">
-                     <div class="media-icn top tw"></div> Follow us on Twitter
-                  </a></li>
+                  <li><a href="<?php echo $website["tw"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Follow us on Twitter">
+                        <div class="media-icn top tw"></div> Follow us on Twitter
+                     </a></li>
                <?php } ?>
                <?php if ($website["pint"] != null) { ?>
-               <li><a href="<?php echo $website["pint"]; ?>" target="_blank" data-toggle="tooltip"
-                     data-placement="bottom" title="Follow on Pinterest">
-                     <div class="media-icn top pr"></div> Follow on Pinterest
-                  </a></li>
+                  <li><a href="<?php echo $website["pint"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Follow on Pinterest">
+                        <div class="media-icn top pr"></div> Follow on Pinterest
+                     </a></li>
                <?php } ?>
                <?php if ($website["gplus"] != null) { ?>
-               <li><a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip"
-                     data-placement="bottom" title="Follow on Google Plus">
-                     <div class="media-icn top gp"></div> Follow on Google Plus
-                  </a></li>
+                  <li><a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Follow on Google Plus">
+                        <div class="media-icn top gp"></div> Follow on Google Plus
+                     </a></li>
                <?php } ?>
                <?php if ($website["yt"] != null) { ?>
-               <li><a href="<?php echo $website["yt"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom"
-                     title="Watch us on YouTube">
-                     <div class="media-icn top ut"></div> Watch us on YouTube
-                  </a></li>
+                  <li><a href="<?php echo $website["yt"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Watch us on YouTube">
+                        <div class="media-icn top ut"></div> Watch us on YouTube
+                     </a></li>
                <?php } ?>
             </ul>
          </div>
@@ -97,3 +89,5 @@
 <?php
 
 include_once './footer_css_js.php';
+
+cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>

@@ -62,3 +62,5 @@ class dbConfig
 
 /* set default timezone */
 date_default_timezone_set('Asia/Colombo');
+
+cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");

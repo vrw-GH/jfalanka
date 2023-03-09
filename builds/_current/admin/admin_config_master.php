@@ -98,4 +98,5 @@ $website['images']['page_gal_width'] = 1024; /* scaled size. only one value for 
 $website['images']['page_gal_height'] = 0;
 $website['images']['page_thumb_width'] = 360;
 $website['images']['page_thumb_height'] = 0;
-?>
+
+cLog( pathinfo(__FILE__, PATHINFO_FILENAME)." loaded.");

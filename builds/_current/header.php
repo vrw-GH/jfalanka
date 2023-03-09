@@ -12,6 +12,7 @@ $myCon = new dbConfig();
 $myCon->connect();
 $enObj = new encryption();
 ?>
+
 <div id="header" class="<?php if ($pid == 1) echo 'home'; ?>" style="position: fixed; z-index:99;">
    <div class="container-fluid">
       <div class="row">
@@ -81,3 +82,5 @@ $enObj = new encryption();
       </div>
    </div>
 </div>
+
+<?= cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.');?>

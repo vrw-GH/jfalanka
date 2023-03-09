@@ -5,8 +5,8 @@
             class="col-xs-12 col-sm-4 col-md-4 col-lg-3 side-menu dark-color text-center text-center col-xs-text-center col-xxs-text-center">
             <div class="voffset-b-5">&nbsp;</div>
             <a href="home.php#">
-               <img src="<?= $website['logo']; ?>" alt="<?php echo $website['domain']; ?>"
-                  class="img-responsive img-center" />
+               <img src="../<?= $website['images_folder'] ?>/<?= $website['logo']; ?>"
+                  alt="<?php echo $website['domain']; ?>" class="img-responsive img-center" />
             </a>
             <ul class="listnone text-center voffset-5">
                <li class="h2">Hotline</li>
@@ -97,3 +97,5 @@
 <?php
 
 include_once './footer_css_js.php';
+
+cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>
