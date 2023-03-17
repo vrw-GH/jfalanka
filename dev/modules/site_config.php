@@ -6,19 +6,43 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-
 $systemdate = date('Y-m-d');
 $pid = 1;
+
+/* --------------------------------------------------------------------
+ * Domain info/URLS
+ */
+$domain['base_dir']
+    = preg_replace("!\\\modules!", '', __DIR__); /* Absolute path to your installation, ex: /var/www/mywebsite  or C:\wamp\www\mywebsite */
+$domain['doc_root']
+    = preg_replace("!{$_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);  /* ex: /var/www */
+$f = "/" . basename($_SERVER['SCRIPT_FILENAME']);
+$a = preg_replace("!^{$domain['doc_root']}!", '', $_SERVER['SCRIPT_FILENAME']);
+$domain['base_url']
+    =  preg_replace("!{$f}$!", '', $a); /* '' or '/mywebsite' */
+$domain['base_url'] = preg_replace("!/modules!", '', $domain['base_url']);
+$domain['protocol']
+    = empty($_SERVER['HTTPS']) ? 'http' : 'https';
+$domain['port']
+    = $_SERVER['SERVER_PORT'];
+$domain['disp_port']
+    = ($domain['protocol'] == 'http' && $domain['port'] == 80 || $domain['protocol'] == 'https' && $domain['port'] == 443) ? '' : ":" . $domain['port'];
+$domain['domain']
+    = $_SERVER['SERVER_NAME'];
+$domain['full_url']
+    = $domain['protocol'] . "://" . $domain['domain'] . $domain['disp_port'] . $domain['base_url']; /* Ex: 'http://example.com', 'https://example.com/    mywebsite', etc. */
+
 /* --------------------------------------------------------------------
  * Resource URLS
  */
 $website['admin_folder']             = 'admin';
-$website['models_folder']            = 'models';
 $website['uploads_folder']           = 'uploads';
 $website['downloads_folder']         = 'downloads';
 $website['images_folder']            = 'resources/images';
 $website['bootstrap_folder']         = 'resources/bootstrap-3.3.7';
-$website['captcha_folder']           = 'modules/simple_captcha';
+$website['db1_php']                  = 'models/dbConfig1.php';
+$website['emailer_php']              = 'components/smtp-emailer.php';
+$website['captcha_php']              = 'resources/new_captcha/captcha.php';
 $website['jquery_min_js']            = 'resources/js/jquery-3.1.1.min.js';
 $website['jquery_migrate_js']        = 'resources/js/jquery-migrate-3.0.0.min.js';
 $website['jquery_migrate_lower_js']  = 'resources/js/jquery-migrate-1.4.1.min.js';
@@ -28,7 +52,6 @@ $website['jquery_ui_theme_css']      = 'resources/css/jquery-ui.theme.min.css';
 $website['jquery_ui_structure_css']  = 'resources/css/jquery-ui.structure.min.css';
 $website['masonry_pkgd_min_js']      = 'resources/js/masonry.pkgd.min.js';
 $website['imagesloaded_pkgd_min_js'] = 'resources/js/imagesloaded.pkgd.min.js';
-
 
 /* --------------------------------------------------------------------
  * Production and Dev Customizations
@@ -43,9 +66,6 @@ if (file_exists('../.localDevOnly/dev-definitions.php')) {
      */
     include_once '../.localDevOnly/dev-definitions.php';
 }
-// include .ENV file
-// * (wont overwrite if already defined) - ie in dev-definitions.php
-include_once 'get-dotenvs.php';
 function cLog($a)
 {
     (function_exists("cLogger")) ? cLogger($a) : null;
@@ -56,43 +76,36 @@ define(
     ["http://wrightsdesk.com", "Redesign(2023): The Leisure Co."]
 );
 define('LOCAL',  $_SERVER['SERVER_NAME'] == "localhost"); /* true/false */
-if (!defined('WEB_HOST'))  define('WEB_HOST', 'http://www.jfalanka.com');
+if (!defined('WEB_HOST'))  define('WEB_HOST', $domain['full_url']);
+if (!defined('CAPTCHA_LEN'))  define('CAPTCHA_LEN', 5);
 /* Site URLs for .htaccess UrlReWrite (without end /) */
 $canonical_url = WEB_HOST;
+// include .ENV file
+// * (wont overwrite if already defined) - ie in dev-definitions.php
+include_once 'get-dotenvs.php';
+$pageinfo['title'] = ($pageinfo['mode'] != "live") ? $pageinfo['title'] : $config['seo']['seo_title'];
 
 /* --------------------------------------------------------------------
  * include admin configuration file
  */
-if (file_exists('../' . $website["admin_folder"] . '/admin_config.php')) {
-    include_once '../' . $website["admin_folder"] . '/admin_config.php';
-} else {
-    include_once WEB_HOST . '/' . $website["admin_folder"] . '/admin_config.php';
-}
-
-/* --------------------------------------------------------------------
- * Database Connection
- */
-if (file_exists('../' . $website["models_folder"] . '/dbConfig.php')) {
-    include_once '../' . $website["models_folder"] . '/dbConfig.php';
-} else {
-    include_once WEB_HOST . '/' . $website["models_folder"] . '/dbConfig.php';
-}
-$myCon = new dbConfig();
-$myCon->connect();
+include_once '../' . $website["admin_folder"] . '/admin_config.php';
 
 /* --------------------------------------------------------------------
  * Encryption
  */
-if (file_exists('../' . $website["models_folder"] . '/encryption.php')) {
-    include_once '../' . $website["models_folder"] . '/encryption.php';
-} else {
-    include_once WEB_HOST . '/' . $website["models_folder"] . '/encryption.php';
-}
+include_once '../components/encryption.php';
 $encObj = new encryption();
+
+/* --------------------------------------------------------------------
+ * Database Connections
+ */
+include_once '../' . $website['db1_php'];
 
 /* --------------------------------------------------------------------
  * Saving Contact Data
  */
+$myCon = new dbConfig1();
+$myCon->connect();
 $query = "SELECT * FROM company_info CROSS JOIN seo LIMIT 1";
 $result = $myCon->query($query);
 while ($row = mysqli_fetch_assoc($result)) {
@@ -136,8 +149,13 @@ while ($row = mysqli_fetch_assoc($result)) {
 $myCon->closeCon();
 
 /* Emailing */
-if (!defined('SEND_EMAIL')) define('SEND_EMAIL', 'noreply@' . $website['domain']); /* use accountname@host.phenomhost.com */
-if (!defined('REC_EMAIL'))  define('REC_EMAIL', $website['email']);
+if (!defined('ISSMTP'))     define('ISSMTP', true);
+if (!defined('SMTP_HOST'))  define('SMTP_HOST', 'mail.' . $website['domain']);
+if (!defined('SMTP_USER'))  define('SMTP_USER', 'webadmin@' . $website['domain']);
+if (!defined('SMTP_PWD'))   define('SMTP_PWD', '');
+if (!defined('SMTP_PORT'))  define('SMTP_PORT', 465); // 25 or 587
+if (!defined('EMAIL_TO'))  define('EMAIL_TO', $website['email']);
+if (!defined('EMAIL_FROM')) define('EMAIL_FROM', 'noreply@' . $website['domain']); /* use accountname@host.phenomhost.com */
 
 /* --------------------------------------------------------------------
  * og prefix
@@ -145,30 +163,7 @@ if (!defined('REC_EMAIL'))  define('REC_EMAIL', $website['email']);
 define('SITE_SEO', $encObj->decode(SITE_SEO_KEY));
 define('OG_PRIFIX', 'prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"');
 
-/* --------------------------------------------------------------------
- * Domain info/URLS
- */
-$domain['base_dir']
-    = __DIR__; /* Absolute path to your installation, ex: /var/www/mywebsite  or C:\wamp\www\mywebsite */
-
-$domain['doc_root']
-    = preg_replace("!{$_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);  /* ex: /var/www */
-$f = "/" . basename($_SERVER['SCRIPT_FILENAME']);
-$a = preg_replace("!^{$domain['doc_root']}!", '', $_SERVER['SCRIPT_FILENAME']);
-$domain['base_url']
-    = preg_replace("!{$f}$!", '', $a); /* '' or '/mywebsite' */
-$domain['protocol']
-    = empty($_SERVER['HTTPS']) ? 'http' : 'https';
-$domain['port']
-    = $_SERVER['SERVER_PORT'];
-$domain['disp_port']
-    = ($domain['protocol'] == 'http' && $domain['port'] == 80 || $domain['protocol'] == 'https' && $domain['port'] == 443) ? '' : ":" . $domain['port'];
-$domain['domain']
-    = $_SERVER['SERVER_NAME'];
-$domain['full_url']
-    = $domain['protocol'] . "://" . $domain['domain'] . $domain['disp_port'] . $domain['base_url']; /* Ex: 'http://example.com', 'https://example.com/    mywebsite', etc. */
-
-cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");
+cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . " loaded.");
 $constants = get_defined_constants(true)['user'];
 cLog($constants);
 cLog($website);

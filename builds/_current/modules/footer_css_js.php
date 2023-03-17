@@ -1,12 +1,11 @@
 <!-- Masonry & imageload plugin -->
 
 <?php
-// $thisRoot = WEB_HOST;
-$thisRoot = ".";
+$thisRoot = "../";
 ?>
 
-<script src="<?php echo $thisRoot ?>/resources/js/imagesloaded.pkgd.min.js"></script>
-<script src="<?php echo $thisRoot ?>/resources/js/masonry.pkgd.min.js"></script>
+<script src="<?php echo $thisRoot ?>/<?= $website['imagesloaded_pkgd_min_js'] ?>"></script>
+<script src="<?php echo $thisRoot ?>/<?= $website['masonry_pkgd_min_js'] ?>"></script>
 <script>
 $(document).ready(function() {
    /* may conflict with slider_thumb */
@@ -77,11 +76,11 @@ $(function() {
 </script>
 <!-- Custom Select -->
 <link rel="stylesheet"
-   href="<?php echo $thisRoot ?>/<?php echo $website['boostrap_folder']; ?>/custom_select/dist/css/bootstrap-select.min.css">
+   href="<?php echo $thisRoot ?>/<?php echo $website['bootstrap_folder']; ?>/custom_select/dist/css/bootstrap-select.min.css">
 <script
-   src="<?php echo $thisRoot ?>/<?php echo $website['boostrap_folder']; ?>/custom_select/dist/js/bootstrap-select.min.js"
+   src="<?php echo $thisRoot ?>/<?php echo $website['bootstrap_folder']; ?>/custom_select/dist/js/bootstrap-select.min.js"
    type="text/javascript" charset="utf-8"></script>
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a01ca7b75fcd9c"></script> -->
-<?= cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.');?>
+<?= cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>

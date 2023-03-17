@@ -69,9 +69,10 @@ function captcha($config = array())
 		$image_src = substr(__FILE__, strlen($_SERVER['DOCUMENT_ROOT'])) . '?_CAPTCHA&amp;t=' . urlencode(microtime());
 		$image_src = '/' . ltrim(preg_replace('/\\\\/', '/', $image_src), '/');
 	} else {
-		$image_src = WEB_HOST . '/simple_captcha/simple-php-captcha.php' . '?_CAPTCHA&amp;t=' . urlencode(microtime());
+
+		$image_src = WEB_HOST . '/resources/simple_captcha/simple-php-captcha.php' . '?_CAPTCHA&amp;t=' . urlencode(microtime());
 		$image_src = ltrim(preg_replace('/\\\\/', '/', $image_src), '/');
-	}
+	};
 
 	$_SESSION['_CAPTCHA']['config'] = serialize($captcha_config);
 
@@ -170,3 +171,5 @@ if (isset($_GET['_CAPTCHA'])) {
 	header("Content-type: image/png");
 	imagepng($captcha);
 }
+
+cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");

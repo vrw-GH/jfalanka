@@ -28,4 +28,4 @@ $website['gallery']['main_entry'] = true; /* enable gallery on main category wis
 
 
 /* page */
-cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");
+cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . " loaded.");

@@ -1,0 +1,64 @@
+%YAML 1.1
+---
+# jfalanka.item_main_category
+-
+  cat_code: 01
+  cat_name: "House Constructions"
+  cat_title: "TROPICAL HOMES"
+  cat_details: ""
+  cat_logo: "resources/images/logo-tropicalhomes.jpg"
+  cat_url_slug: "house-constructions"
+  local_url: null
+  custom_url: "http://www.tropicalhomes.lk"
+  display_url: "www.tropicalhomes.lk"
+  cat_order: 3
+  active: "1"
+-
+  cat_code: 02
+  cat_name: "Solar Hotwater Systems "
+  cat_title: "SUNBIRD"
+  cat_details: ""
+  cat_logo: "resources/images/logo-sunbird.jpg"
+  cat_url_slug: "solar-hotwater-systems"
+  local_url: ""
+  custom_url: "http://www.sunbird.lk"
+  display_url: "www.sunbird.lk"
+  cat_order: 0
+  active: "1"
+-
+  cat_code: 03
+  cat_name: "PV Solar Energy Systems "
+  cat_title: "SENSE-PV"
+  cat_details: ""
+  cat_logo: "resources/images/logo-sensepv.png"
+  cat_url_slug: "pv-solar-energy-systems"
+  local_url: ""
+  custom_url: "http://www.sensepv.lk"
+  display_url: "www.sensepv.lk"
+  cat_order: 1
+  active: "1"
+-
+  cat_code: 04
+  cat_name: "Luxury Holiday Bungalow"
+  cat_title: "TROPICAL VILLAS"
+  cat_details: ""
+  cat_logo: "resources/images/logo-tropicalvillas.jpg"
+  cat_url_slug: "tropical-villas"
+  local_url: null
+  custom_url: "http://www.tropicalvillas.lk"
+  display_url: "www.tropicalvillas.lk"
+  cat_order: 4
+  active: "1"
+-
+  cat_code: 05
+  cat_name: "Eco-Organic Agriculture"
+  cat_title: "GREEN AGRO FARMS"
+  cat_details: ""
+  cat_logo: "resources/images/logo-greenagrofarms.jpg"
+  cat_url_slug: "green-agro-farms"
+  local_url: null
+  custom_url: ""
+  display_url: ""
+  cat_order: 2
+  active: "1"
+...

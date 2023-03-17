@@ -1,0 +1,33 @@
+===Database jfalanka
+
+== Table structure for table company_info
+
+|------
+|Column|Type|Null|Default
+|------
+|//**comp_name**//|varchar(80)|No|
+|comp_web_title|varchar(60)|No|
+|comp_address|varchar(250)|Yes|NULL
+|comp_hotline|varchar(40)|Yes|NULL
+|comp_phone|varchar(150)|Yes|NULL
+|comp_fax|varchar(40)|Yes|NULL
+|**comp_email**|varchar(250)|No|
+|comp_email2|varchar(250)|Yes|NULL
+|//**comp_domain**//|varchar(80)|No|
+|comp_profile|varchar(500)|Yes|NULL
+|comp_vision|varchar(300)|Yes|NULL
+|comp_mission|varchar(300)|Yes|NULL
+|comp_google_map|varchar(500)|Yes|NULL
+|comp_google_map_size|varchar(45)|Yes|NULL
+|comp_logo|varchar(255)|Yes|NULL
+|comp_skype|varchar(200)|Yes|NULL
+|comp_fb|varchar(200)|Yes|NULL
+|comp_tw|varchar(200)|Yes|NULL
+|comp_gplus|varchar(200)|Yes|NULL
+|comp_yt|varchar(200)|Yes|NULL
+|comp_pint|varchar(200)|Yes|NULL
+== Dumping data for table company_info
+
+|Jude Fernandopulle Associates&lt;br/&gt;&lt;span&gt;(Private) Limited&lt;/span&gt;|Jude Fernandopulle Associates (Pvt) Ltd.|No.165, Colombo Road, 
+Negombo,
+Sri Lanka.|+94 777 165 165|+94 31 222 8700,  +94 31 222 8900|+94 31 222 4942  |info@jfalanka.com| |jfalanka.com|Incorporated in the Democratic Socialist Republic of Sri Lanka under the Companies Act No.17 of 1982. Registration No: N(PVS)9832 dated 25-Sep-1992 ICTAD (M5) Registration No 5730. Member of the NCCASL.&lt;br /&gt;Founded in 1989, JFA had very humble beginnings and has grown and prospered with much hard work, and today still holds on to its core values of providing the Best Service with Quality and maintaining our best asset – our very loyal customer base.|To be the forerunner in Solar Technology and set standards in eco friendly environments Preserving human values in harmony with technology.|To make JFA synonymous with &quot;Quality and Service&quot;, and SUNBIRD a household word as the “Best provider of Solar Technology” at affordable cost and of international standards with highest level of after-sales service.|https://www.google.com/maps/embed?|large-top|resources/images/logo-jfa.png|https://www.facebook.com/sunbird.jfa|https://www.facebook.com/sunbird.jfa|https://www.facebook.com/sunbird.jfa|https://www.facebook.com/sunbird.jfa|https://www.youtube.com/@sunbird-jfaofficefactoryco762|https://www.facebook.com/sunbird.jfa

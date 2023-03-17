@@ -1,6 +1,6 @@
 <?php
 
-class dbConfig
+class dbConfig1
 {
     private $db_host = DB_HOST;
     private $db_user = DB_USER;
@@ -9,6 +9,10 @@ class dbConfig
 
     /* connection variable */
     private $dbq;
+
+    public function __construct()
+    {
+    }
 
     public function getDbq()
     {
@@ -63,4 +67,4 @@ class dbConfig
 /* set default timezone */
 date_default_timezone_set('Asia/Colombo');
 
-cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");
+cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . " loaded.");

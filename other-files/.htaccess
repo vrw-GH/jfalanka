@@ -1,5 +1,6 @@
-RemoveHandler .php .html
-RemoveType .php .html
+# required for displaying as "directory" in local mode, i.e: ignore php/htm:l files
+RemoveHandler .php .htm .html
+RemoveType .php .htm .html
 
 #IndexOptions +FancyIndexing
 #IndexIgnore index.php index.html
