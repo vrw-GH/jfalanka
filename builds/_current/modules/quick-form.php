@@ -1,11 +1,13 @@
 <?php
-include_once './site_config.php';
+// include_once 'site_config.php';
 if (!isset($_SESSION)) {
    session_start();
 }
 
-include "simple_captcha/simple-php-captcha.php";
-include_once './models/dbConfig.php';
+include "../resources/simple_captcha/simple-php-captcha.php";
+$_SESSION['captcha'] = captcha();
+
+// include_once '../models/dbConfig.php';
 $myCon = new dbConfig();
 $myCon->connect();
 
@@ -74,12 +76,14 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
 ?>
 <div class="container">
    <div class="row">
-      <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+      <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="contactLabel"
+         aria-hidden="true">
          <div class="modal-dialog">
             <div class="panel panel-default">
                <div class="panel-heading">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="panel-title" id="contactLabel"><span class="glyphicons glyphicons-message-plus"></span>&nbsp; If you would like more information?
+                  <h4 class="panel-title" id="contactLabel"><span
+                        class="glyphicons glyphicons-message-plus"></span>&nbsp; If you would like more information?
                      Feel free to contact us.</h4>
                </div>
                <div class="row">
@@ -126,7 +130,9 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 voffset-2">
                            <label><span class="text-danger">*</span> First Name</label>
-                           <input class="form-control" name="firstname" placeholder="Firstname" type="text" required autofocus value="<?php
+                           <input class="form-control" name="firstname" placeholder="Firstname" type="text" required
+                              autofocus
+                              value="<?php
                                                                                                                                        if (isset($_POST['firstname'])) {
                                                                                                                                           echo $_POST['firstname'];
                                                                                                                                        }
@@ -134,7 +140,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 voffset-2">
                            <label><span class="text-danger">*</span> Last Name</label>
-                           <input class="form-control" name="lastname" placeholder="Lastname" type="text" required value="<?php
+                           <input class="form-control" name="lastname" placeholder="Lastname" type="text" required
+                              value="<?php
                                                                                                                            if (isset($_POST['lastname'])) {
                                                                                                                               echo $_POST['lastname'];
                                                                                                                            }
@@ -144,7 +151,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 voffset-2">
                            <label><span class="text-danger">*</span> Phone No</label>
-                           <input class="form-control" name="phone" placeholder="Phone" type="text" required value="<?php
+                           <input class="form-control" name="phone" placeholder="Phone" type="text" required
+                              value="<?php
                                                                                                                      if (isset($_POST['phone'])) {
                                                                                                                         echo $_POST['phone'];
                                                                                                                      }
@@ -152,7 +160,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 voffset-2">
                            <label><span class="text-danger">*</span> Your Email</label>
-                           <input class="form-control" name="email" placeholder="E-mail" type="text" required value="<?php
+                           <input class="form-control" name="email" placeholder="E-mail" type="text" required
+                              value="<?php
                                                                                                                      if (isset($_POST['email'])) {
                                                                                                                         echo $_POST['email'];
                                                                                                                      }
@@ -162,7 +171,9 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 voffset-2">
                            <label><span class="text-danger">*</span> Subject</label>
-                           <input class="form-control" id="subject" name="subject" placeholder="Subject" type="text" required value="<?php
+                           <input class="form-control" id="subject" name="subject" placeholder="Subject" type="text"
+                              required
+                              value="<?php
                                                                                                                                        if (isset($_POST['subject'])) {
                                                                                                                                           echo $_POST['subject'];
                                                                                                                                        }
@@ -172,7 +183,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 voffset-2">
                            <label>Message</label>
-                           <textarea class="form-control" placeholder="Message..." rows="5" name="comment"><?php
+                           <textarea class="form-control" placeholder="Message..." rows="5"
+                              name="comment"><?php
                                                                                                             if (isset($_POST['comment'])) {
                                                                                                                echo $_POST['comment'];
                                                                                                             }
@@ -185,20 +197,23 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                         </div>
                         <div class="form-group col-xs-12">
                            <div class="form-group col-xs-6 voffset-1 col-xxs-full-width">
-                              <?php
-                              echo '<img src="' . $_SESSION['captcha']['image_src'] . '" alt="CAPTCHA" class="img-responsive col-xxs-center-img"/>';
-                              ?>
+                              <img src="<?= $_SESSION['captcha']['image_src']; ?>" alt="CAPTCHA1"
+                                 class="img-responsive col-xxs-center-img" />
                            </div>
                            <div class="form-group col-xs-6 col-xxs-full-width">
-                              <label><span class="text-danger">*</span> Type the Image Text :</label><input name="captchabox" type="text" size="20" maxlength="10" id="captchabox" value="" class="form-control" required>
+                              <label><span class="text-danger">*</span> Type the Image Text :</label><input
+                                 name="captchabox" type="text" size="20" maxlength="10" id="captchabox" value=""
+                                 class="form-control" required>
                            </div>
                         </div>
                      </div>
                   </div>
                   <div class="panel-footer voffset-1 text-right">
-                     <button type="submit" class="btn btn-info square" value="Send">Send <span class="glyphicon glyphicon-send"></span></button>
+                     <button type="submit" class="btn btn-info square" value="Send">Send <span
+                           class="glyphicon glyphicon-send"></span></button>
                      <!--<span class="glyphicon glyphicon-remove"></span>-->
-                     <button type="button" class="btn btn-danger btn-close btn-xs square offset-l-2" data-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-danger btn-close btn-xs square offset-l-2"
+                        data-dismiss="modal">Close</button>
                   </div>
                </form>
             </div>
@@ -208,12 +223,14 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
    <!-- row END -->
    <!-- Rentals row Start -->
    <div class="row">
-      <div class="modal fade" id="contact-rentals" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+      <div class="modal fade" id="contact-rentals" tabindex="-1" role="dialog" aria-labelledby="contactLabel"
+         aria-hidden="true">
          <div class="modal-dialog">
             <div class="panel panel-default">
                <div class="panel-heading">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="panel-title" id="contactLabel"><span class="glyphicons glyphicons-message-plus"></span>&nbsp; Make a service request.</h4>
+                  <h4 class="panel-title" id="contactLabel"><span
+                        class="glyphicons glyphicons-message-plus"></span>&nbsp; Make a service request.</h4>
                </div>
                <div class="row">
                   <div class="col-xs-12 voffset-1 voffset-b-1">
@@ -262,7 +279,9 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 voffset-2">
                            <label><span class="text-danger">*</span> First Name</label>
-                           <input class="form-control" name="firstname" placeholder="Firstname" type="text" required autofocus value="<?php
+                           <input class="form-control" name="firstname" placeholder="Firstname" type="text" required
+                              autofocus
+                              value="<?php
                                                                                                                                        if (isset($_POST['firstname'])) {
                                                                                                                                           echo $_POST['firstname'];
                                                                                                                                        }
@@ -270,7 +289,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 voffset-2">
                            <label><span class="text-danger">*</span> Last Name</label>
-                           <input class="form-control" name="lastname" placeholder="Lastname" type="text" required value="<?php
+                           <input class="form-control" name="lastname" placeholder="Lastname" type="text" required
+                              value="<?php
                                                                                                                            if (isset($_POST['lastname'])) {
                                                                                                                               echo $_POST['lastname'];
                                                                                                                            }
@@ -280,7 +300,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 voffset-2">
                            <label><span class="text-danger">*</span> Phone No</label>
-                           <input class="form-control" name="phone" placeholder="Phone" type="text" required value="<?php
+                           <input class="form-control" name="phone" placeholder="Phone" type="text" required
+                              value="<?php
                                                                                                                      if (isset($_POST['phone'])) {
                                                                                                                         echo $_POST['phone'];
                                                                                                                      }
@@ -288,7 +309,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 voffset-2">
                            <label><span class="text-danger">*</span> Your Email</label>
-                           <input class="form-control" name="email" placeholder="E-mail" type="text" required value="<?php
+                           <input class="form-control" name="email" placeholder="E-mail" type="text" required
+                              value="<?php
                                                                                                                      if (isset($_POST['email'])) {
                                                                                                                         echo $_POST['email'];
                                                                                                                      }
@@ -303,11 +325,12 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                            $query = "SELECT * FROM item_main_category WHERE active ='1' ORDER BY cat_name ASC";
                            $result = $myCon->query($query);
                            ?>
-                           <select name="cat_name" class="form-control selectpicker" multiple show-menu-arrow required data-size="5">
+                           <select name="cat_name" class="form-control selectpicker" multiple show-menu-arrow required
+                              data-size="5">
                               <option disabled>Please Select one or more option(s)</option>
                               <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                                 <option value="<?php echo ($row['cat_name']); ?>">
-                                    <?php echo ($row['cat_name']); ?></option>
+                              <option value="<?php echo ($row['cat_name']); ?>">
+                                 <?php echo ($row['cat_name']); ?></option>
                               <?php } ?>
                            </select>
                         </div>
@@ -315,7 +338,9 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 voffset-2">
                            <label><span class="text-danger">*</span> Subject</label>
-                           <input class="form-control" id="rent_subject" name="subject" placeholder="Subject" type="text" required value="<?php
+                           <input class="form-control" id="rent_subject" name="subject" placeholder="Subject"
+                              type="text" required
+                              value="<?php
                                                                                                                                           if (isset($_POST['subject'])) {
                                                                                                                                              echo $_POST['subject'];
                                                                                                                                           }
@@ -325,7 +350,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 voffset-2">
                            <label>Message</label>
-                           <textarea class="form-control" placeholder="Message..." rows="5" name="comment"><?php
+                           <textarea class="form-control" placeholder="Message..." rows="5"
+                              name="comment"><?php
                                                                                                             if (isset($_POST['comment'])) {
                                                                                                                echo $_POST['comment'];
                                                                                                             }
@@ -338,20 +364,24 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                         </div>
                         <div class="form-group col-xs-12">
                            <div class="form-group col-xs-6 voffset-1 col-xxs-full-width">
-                              <?php
-                              echo '<img src="' . $_SESSION['captcha']['image_src'] . '" alt="CAPTCHA" class="img-responsive col-xxs-center-img"/>';
-                              ?>
+                              <img src="<?= $_SESSION['captcha']['image_src']; ?>" alt="CAPTCHA2"
+                                 class="img-responsive col-xxs-center-img" />
+
                            </div>
                            <div class="form-group col-xs-6 col-xxs-full-width">
-                              <label><span class="text-danger">*</span> Type the Image Text :</label><input name="captchabox" type="text" size="20" maxlength="10" id="captchabox" value="" class="form-control" required>
+                              <label><span class="text-danger">*</span> Type the Image Text :</label><input
+                                 name="captchabox" type="text" size="20" maxlength="10" id="captchabox" value=""
+                                 class="form-control" required>
                            </div>
                         </div>
                      </div>
                   </div>
                   <div class="panel-footer voffset-1 text-right">
-                     <button type="submit" class="btn btn-info square" value="Send">Send <span class="glyphicon glyphicon-send"></span></button>
+                     <button type="submit" class="btn btn-info square" value="Send">Send <span
+                           class="glyphicon glyphicon-send"></span></button>
                      <!--<span class="glyphicon glyphicon-remove"></span>-->
-                     <button type="button" class="btn btn-danger btn-close btn-xs square offset-l-2" data-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-danger btn-close btn-xs square offset-l-2"
+                        data-dismiss="modal">Close</button>
                   </div>
                </form>
             </div>
@@ -360,41 +390,43 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
    </div>
    <!-- row END -->
 </div>
+
 <script>
-   $(document).ready(function() {
-      $(".data_inq").click(function() {
-         $("#subject").val($(this).data('id'));
-         $('#contact').modal({
-            modal: true,
-            backdrop: 'static',
-            keyboard: false
-         });
+$(document).ready(function() {
+   $(".data_inq").click(function() {
+      $("#subject").val($(this).data('id'));
+      $('#contact').modal({
+         modal: true,
+         backdrop: 'static',
+         keyboard: false
       });
-      $(".data_rent").click(function() {
-         $("#rent_subject").val($(this).data('id'));
-         $('#contact-rentals').modal({
-            modal: true,
-            backdrop: 'static',
-            keyboard: false
-         });
-      });
-      <?php if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['quick-form']) && $_POST['quick-form'] == 'products') { ?>
-         $('#contact').modal({
-            modal: true,
-            backdrop: 'static',
-            keyboard: false
-         });
-      <?php } else if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['quick-form']) && $_POST['quick-form'] == 'rentals') { ?>
-         $('#contact-rentals').modal({
-            modal: true,
-            backdrop: 'static',
-            keyboard: false
-         });
-      <?php } ?>
    });
+   $(".data_rent").click(function() {
+      $("#rent_subject").val($(this).data('id'));
+      $('#contact-rentals').modal({
+         modal: true,
+         backdrop: 'static',
+         keyboard: false
+      });
+   });
+   <?php if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['quick-form']) && $_POST['quick-form'] == 'products') { ?>
+   $('#contact').modal({
+      modal: true,
+      backdrop: 'static',
+      keyboard: false
+   });
+   <?php } else if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['quick-form']) && $_POST['quick-form'] == 'rentals') { ?>
+   $('#contact-rentals').modal({
+      modal: true,
+      backdrop: 'static',
+      keyboard: false
+   });
+   <?php } ?>
+});
 </script>
+
 <?php
 /* captcha code */
-$_SESSION['captcha'] = captcha();
+
 
 cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>

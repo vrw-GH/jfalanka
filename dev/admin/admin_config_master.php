@@ -99,4 +99,4 @@ $website['images']['page_gal_height'] = 0;
 $website['images']['page_thumb_width'] = 360;
 $website['images']['page_thumb_height'] = 0;
 
-cLog( pathinfo(__FILE__, PATHINFO_FILENAME)." loaded.");
+cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . " loaded.");

@@ -5,8 +5,8 @@ if (!isset($_SESSION)) {
 if (!isset($pid)) {
    $pid = 0;
 }
-include_once 'models/dbConfig.php';
-include_once 'models/encryption.php';
+// include_once '../models/dbConfig.php';
+// include_once '../models/encryption.php';
 
 $myCon = new dbConfig();
 $myCon->connect();
@@ -45,31 +45,31 @@ $enObj = new encryption();
                         <?php if ($website["fb"] != null) { ?>
                         <li><a href="<?php echo $website["fb"]; ?>" target="_blank" data-toggle="tooltip"
                               data-placement="bottom" title="Like us on Facebook" class="scrollme" height="50px">
-                              <img src="./resources/images/social_fb_24x24_5_cr.png">
+                              <img src="../<?= $website['images_folder'] ?>/social_fb_24x24_5_cr.png">
                            </a></li>
                         <?php } ?>
                         <?php if ($website["tw"] != null) { ?>
                         <li><a href="<?php echo $website["tw"]; ?>" target="_blank" data-toggle="tooltip"
                               data-placement="bottom" title="Follow us on Twitter" class="scrollme"><img
-                                 src="./resources/images/social_tw_24x24_5_cr.png">
+                                 src="../<?= $website['images_folder'] ?>/social_tw_24x24_5_cr.png">
                            </a> </li>
                         <?php } ?>
                         <?php if ($website["gplus"] != null) { ?>
                         <li><a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip"
                               data-placement="bottom" title="Follow on Google Plus" class="scrollme">
-                              <img src="./resources/images/social_gp_24x24_5_cr.png">
+                              <img src="../<?= $website['images_folder'] ?>/social_gp_24x24_5_cr.png">
                            </a> </li>
                         <?php } ?>
                         <?php if ($website["yt"] != null) { ?>
                         <li> <a href="<?php echo $website["yt"]; ?>" target="_blank" data-toggle="tooltip"
                               data-placement="bottom" title="Watch us on YouTube" class="scrollme"><img
-                                 src="./resources/images/social_yt_24x24_5_cr.png">
+                                 src="../<?= $website['images_folder'] ?>/social_yt_24x24_5_cr.png">
                            </a></li>
                         <?php } ?>
                         <?php if ($website["pint"] != null) { ?>
                         <li> <a href="<?php echo $website["pint"]; ?>" target="_blank" data-toggle="tooltip"
                               data-placement="bottom" title="Follow us on Pinterest" class="scrollme"><img
-                                 src="./resources/images/social_pi_24x24_5_cr.png">
+                                 src="../<?= $website['images_folder'] ?>/social_pi_24x24_5_cr.png">
                            </a></li>
                         <?php } ?>
 
@@ -83,4 +83,4 @@ $enObj = new encryption();
    </div>
 </div>
 
-<?= cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.');?>
+<?= cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>

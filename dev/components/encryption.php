@@ -3,8 +3,16 @@
 class encryption
 {
 
-    var $skey = "abc25dfsdgh2374e"; // you can change it	
-    var $cipher = "aes-128-gcm";
+    private $skey = "abc25dfsdgh2374e"; // you can change it	
+    private $cipher = "aes-128-gcm";
+    private $tag = null;
+    private $iv;
+
+    public function __construct()
+    {
+        $iv_size = openssl_cipher_iv_length($this->cipher);
+        $this->iv = openssl_random_pseudo_bytes($iv_size);
+    }
 
     public function safe_b64encode($string)
     {
@@ -34,9 +42,9 @@ class encryption
         // $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
         // $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
         // $crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $this->skey, $text, MCRYPT_MODE_ECB, $iv);
-        $iv_size = openssl_cipher_iv_length($this->cipher);
-        $iv = openssl_random_pseudo_bytes($iv_size);
-        $crypttext = openssl_encrypt($text, $this->cipher, $this->skey, $options = 0, $iv); //, $tag
+        // $iv_size = openssl_cipher_iv_length($this->cipher);
+        // $iv = openssl_random_pseudo_bytes($iv_size);
+        $crypttext = openssl_encrypt($text, $this->cipher, $this->skey, $options = 0, $this->iv, $this->tag); //, $tag
 
         return trim($this->safe_b64encode($crypttext));
     }
@@ -52,9 +60,9 @@ class encryption
         // $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
         // $decrypttext = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $this->skey, $crypttext, MCRYPT_MODE_ECB, $iv);
 
-        $iv_size = openssl_cipher_iv_length($this->cipher);
-        $iv = openssl_random_pseudo_bytes($iv_size);
-        $decrypttext = openssl_decrypt($crypttext, $this->cipher, $this->skey, $options = 0, $iv); //, $tag
+        // $iv_size = openssl_cipher_iv_length($this->cipher);
+        // $iv = openssl_random_pseudo_bytes($iv_size);
+        $decrypttext = openssl_decrypt($crypttext, $this->cipher, $this->skey, $options = 0, $this->iv, $this->tag); //, $tag
 
         return trim($decrypttext);
     }
@@ -85,4 +93,4 @@ class encryption
     }
 }
 
-cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");
+cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . " loaded.");

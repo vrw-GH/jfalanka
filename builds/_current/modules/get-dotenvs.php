@@ -2,15 +2,16 @@
 
 $envFile = ".env";
 
-if (file_exists("./$envFile")) {
-   $path = '.';
-} else if (file_exists("../$envFile")) {
+if (file_exists("../$envFile")) {
    $path = '..';
 } else if (file_exists("../../$envFile")) {
    $path = '../..';
+} else if (file_exists("../../../$envFile")) {
+   $path = '../../..';
 } else if (file_exists(WEB_HOST . "/$envFile")) {
    $path = WEB_HOST;
 }
+
 if (isset($path)) {
    (new getDotEnvs("$path/$envFile"))->load();
 }
