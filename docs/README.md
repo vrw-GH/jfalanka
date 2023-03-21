@@ -9,7 +9,7 @@
 <pre>
 Versions:
   *Beta(Online): <a href="https://wrightsdesk.com/JFA/jfalanka">builds/_current</a>
-  *Dev Build:    <a href="https://github.com/vrw-GH/jfalanka/tree/main/dev">jfalanka/dev</a>
+  *Dev Build:    <a href="https://github.com/vrw-GH/jfalanka/tree/main/dev2">jfalanka/dev2</a>
   *Live Site:    <a href="http://www.jfalanka.com">jfalanka.com</a>
 
 Developer:   Victor Wright

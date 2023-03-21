@@ -2,9 +2,9 @@
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\{PHPMailer, SMTP, Exception};
 
-require '../resources/PHPMailer/Exception.php';
 require '../resources/PHPMailer/PHPMailer.php';
 require '../resources/PHPMailer/SMTP.php';
+require '../resources/PHPMailer/Exception.php';
 
 include_once '../' . $website['decryptor_php'];
 

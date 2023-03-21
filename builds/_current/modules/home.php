@@ -400,7 +400,7 @@ $(window).resize(function() {
 
 
 
-gzip_output();
+//gzip_output();
 ?>
 
 <?= cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.'); ?>
