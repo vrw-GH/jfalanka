@@ -66,4 +66,4 @@ class getDotEnvs
    }
 }
 
-cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");
+cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . " loaded.");

@@ -1,7 +1,4 @@
-<?php
-/* --------------------------------------------------------------------
- * Site-wide DEFINITIONS  
- */
+<?php // Site-wide DEFINITIONS & info
 
 if (!isset($_SESSION)) {
     session_start();
@@ -9,59 +6,14 @@ if (!isset($_SESSION)) {
 $systemdate = date('Y-m-d');
 $pid = 1;
 
-/* --------------------------------------------------------------------
- * Domain info/URLS
- */
-$domain['base_dir']
-    = preg_replace("!\\\modules!", '', __DIR__); /* Absolute path to your installation, ex: /var/www/mywebsite  or C:\wamp\www\mywebsite */
-$domain['doc_root']
-    = preg_replace("!{$_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);  /* ex: /var/www */
-$f = "/" . basename($_SERVER['SCRIPT_FILENAME']);
-$a = preg_replace("!^{$domain['doc_root']}!", '', $_SERVER['SCRIPT_FILENAME']);
-$domain['base_url']
-    =  preg_replace("!{$f}$!", '', $a); /* '' or '/mywebsite' */
-$domain['base_url'] = preg_replace("!/modules!", '', $domain['base_url']);
-$domain['protocol']
-    = empty($_SERVER['HTTPS']) ? 'http' : 'https';
-$domain['port']
-    = $_SERVER['SERVER_PORT'];
-$domain['disp_port']
-    = ($domain['protocol'] == 'http' && $domain['port'] == 80 || $domain['protocol'] == 'https' && $domain['port'] == 443) ? '' : ":" . $domain['port'];
-$domain['domain']
-    = $_SERVER['SERVER_NAME'];
-$domain['full_url']
-    = $domain['protocol'] . "://" . $domain['domain'] . $domain['disp_port'] . $domain['base_url']; /* Ex: 'http://example.com', 'https://example.com/    mywebsite', etc. */
-
-/* --------------------------------------------------------------------
- * Resource URLS
- */
-$website['admin_folder']             = 'admin';
-$website['models_folder']            = 'models';
-$website['uploads_folder']           = 'uploads';
-$website['downloads_folder']         = 'downloads';
-$website['images_folder']            = 'resources/images';
-$website['bootstrap_folder']         = 'resources/bootstrap-3.3.7';
-$website['captcha_folder']           = 'resources/simple_captcha';
-$website['jquery_min_js']            = 'resources/js/jquery-3.1.1.min.js';
-$website['jquery_migrate_js']        = 'resources/js/jquery-migrate-3.0.0.min.js';
-$website['jquery_migrate_lower_js']  = 'resources/js/jquery-migrate-1.4.1.min.js';
-$website['jquery_ui_css']            = 'resources/css/jquery-ui.min.css';
-$website['jquery_ui_js']             = 'resources/js/jquery-ui.min.js';
-$website['jquery_ui_theme_css']      = 'resources/css/jquery-ui.theme.min.css';
-$website['jquery_ui_structure_css']  = 'resources/css/jquery-ui.structure.min.css';
-$website['masonry_pkgd_min_js']      = 'resources/js/masonry.pkgd.min.js';
-$website['imagesloaded_pkgd_min_js'] = 'resources/js/imagesloaded.pkgd.min.js';
-
-/* --------------------------------------------------------------------
- * Production and Dev Customizations
- */
-if (file_exists('../.localDevOnly/dev-definitions.php')) {
-    /* Use Local (Dev)  
-     ! (keep here, even it is called in index.php due to iframe)
-     * This file sets up "DEV environment" on the local system only
+include_once '../components/domaininfo.php';
+include_once '../admin/admin_config_master.php';
+include_once '../' . $website["admin_folder"] . '/admin_config.php';  // additional admin configs
+if (file_exists('../.localDevOnly/dev-definitions.php')) { // Use Local (Dev) Customizations
+    /* This file sets up "DEV environment" on the local system only
      * but should not affect LIVE server.
      * Also loads the DEBUGGING (cLog) system.
-     ! - do **NOT** copy ".localDevOnly" folder to LIVE site!
+     ! do **NOT** copy this ".localDevOnly" folder to LIVE site!
      */
     include_once '../.localDevOnly/dev-definitions.php';
 }
@@ -69,41 +21,36 @@ function cLog($a)
 {
     (function_exists("cLogger")) ? cLogger($a) : null;
 };
-// 
+
+/* include .ENV file --------------------------------------------------
+ * (wont overwrite if already defined) - ie: in dev-definitions.php
+ */
+include_once 'get-dotenvs.php';
+
+/* --------------------------------------------------------------------
+ * ENV fallbacks and additionals
+ */
+define('LOCAL',  $_SERVER['SERVER_NAME'] == "localhost"); /* true/false */
+if (!defined('WEB_HOST'))       define('WEB_HOST', $domain['full_url']);
+if (!defined('CAPTCHA_LEN'))    define('CAPTCHA_LEN', 5);
+if (!defined('EMAIL_ISSMTP'))   define('EMAIL_ISSMTP', 1); // 1/"true" or 0/"" ( boolval() )
 define(
     'SITE_DEV',
     ["http://wrightsdesk.com", "Redesign(2023): The Leisure Co."]
 );
-define('LOCAL',  $_SERVER['SERVER_NAME'] == "localhost"); /* true/false */
-if (!defined('WEB_HOST'))  define('WEB_HOST', $domain['full_url']);
-/* Site URLs for .htaccess UrlReWrite (without end /) */
-$canonical_url = WEB_HOST;
-// include .ENV file
-// * (wont overwrite if already defined) - ie in dev-definitions.php
-include_once 'get-dotenvs.php';
-$pageinfo['title'] = ($pageinfo['mode'] != "live") ? $pageinfo['title'] : $config['seo']['seo_title'];
 
 /* --------------------------------------------------------------------
- * include admin configuration file
+ * DB & Encryption
  */
-include_once '../' . $website["admin_folder"] . '/admin_config.php';
-
-/* --------------------------------------------------------------------
- * Database Connection
- */
-include_once '../' . $website["models_folder"] . '/dbConfig.php';
-$myCon = new dbConfig();
-$myCon->connect();
-
-/* --------------------------------------------------------------------
- * Encryption
- */
-include_once '../' . $website["models_folder"] . '/encryption.php';
+include_once '../components/encryption.php';
 $encObj = new encryption();
+include_once '../' . $website['db1_php'];
+$myCon = new dbConfig1();
 
 /* --------------------------------------------------------------------
  * Saving Contact Data
  */
+$myCon->connect();
 $query = "SELECT * FROM company_info CROSS JOIN seo LIMIT 1";
 $result = $myCon->query($query);
 while ($row = mysqli_fetch_assoc($result)) {
@@ -146,17 +93,25 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 $myCon->closeCon();
 
-/* Emailing */
-if (!defined('SEND_EMAIL')) define('SEND_EMAIL', 'noreply@' . $website['domain']); /* use accountname@host.phenomhost.com */
-if (!defined('REC_EMAIL'))  define('REC_EMAIL', $website['email']);
-
-/* --------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
+ * SEO Type [basic, ultimate, enterprise] 
  * og prefix
  */
-define('SITE_SEO', $encObj->decode(SITE_SEO_KEY));
-define('OG_PRIFIX', 'prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"');
+define('SITE_SEO',   $encObj->decode(SITE_SEO_KEY)); // ! decryption??
+define('OG_PRIFIX',  'prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"');
 
-cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . " loaded.");
+$canonical_url = WEB_HOST;
+$pageinfo['mode'] = defined("APP_MODE") ? APP_MODE : null;
+$pageinfo['title'] = ($pageinfo['mode'] != "live") ? $pageinfo['title'] : $config['seo']['seo_title'];
+$pageinfo['tagline'] =
+    '<div id="devtagline">' .
+    'Mode: ' . strtoupper($pageinfo["mode"]) . ', ' .
+    'Host: >>' . $pageinfo["webhost"] . '<< ' .
+    '</div>';
+
+/* ---end of configs-------------------------------------------------- */
+
+cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . " loaded.");
 $constants = get_defined_constants(true)['user'];
 cLog($constants);
 cLog($website);

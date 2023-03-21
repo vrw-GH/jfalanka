@@ -8,7 +8,7 @@
 
 <pre>
 Versions:
-  *Beta(Online): <a href="https://github.com/vrw-GH/jfalanka/tree/main/builds/_current">builds/_current</a>
+  *Beta(Online): <a href="https://wrightsdesk.com/JFA/jfalanka">builds/_current</a>
   *Dev Build:    <a href="https://github.com/vrw-GH/jfalanka/tree/main/dev">jfalanka/dev</a>
   *Live Site:    <a href="http://www.jfalanka.com">jfalanka.com</a>
 

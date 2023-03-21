@@ -137,8 +137,10 @@ include_once 'site_config.php';
                         <div class="col-xs-12 voffset-3 visible-xs visible-sm"></div>
                         <h3 class="voffset-1 voffset-b-3 text-center text-uppercase text-bold">Our Products & Services
                         </h3>
+
+
                         <?php
-                        $myCon = new dbConfig();
+                        // $myCon = new dbConfig1();
                         $myCon->connect();
                         $query = "SELECT i.*, u.upload_path FROM item_main_category i LEFT JOIN upload_data u ON "
                            . "i.cat_code = u.upload_ref AND u.upload_type_id = 2 AND u.featured = 1 WHERE "
@@ -169,7 +171,7 @@ include_once 'site_config.php';
                                        data-id='<?php echo $data_id; ?>'>
                                        <div class="icon-wrap">
                                           <a
-                                             href="<?php echo (defined(LOCAL)) ? SITES[$row['cat_order']] : $row['custom_url']; ?>">
+                                             href="<?php echo (defined("SITES")) ? SITES[$row['cat_order']] : $row['custom_url']; ?>">
                                              <img
                                                 src="../<?php echo ($row['upload_path'] != null) ? 'uploads/' . $row['upload_path'] : $website['images_folder'] . '/' . $row['cat_logo']; ?>"
                                                 class="img-responsive" alt="<?php echo $row['cat_url_slug']; ?>">
@@ -190,6 +192,7 @@ include_once 'site_config.php';
                         <?php
                            $data_id += 1;
                         }
+                        $myCon->closeCon();
                         ?>
                      </div>
                   </div>
@@ -400,4 +403,4 @@ $(window).resize(function() {
 gzip_output();
 ?>
 
-<?= cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>
+<?= cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.'); ?>
