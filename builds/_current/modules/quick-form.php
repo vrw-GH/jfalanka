@@ -4,11 +4,13 @@ if (!isset($_SESSION)) {
    session_start();
 }
 
-include "../resources/simple_captcha/simple-php-captcha.php";
-$_SESSION['captcha'] = captcha();
+include_once "../" . $website['emailer_php'];
+
+include_once "../" . $website['captcha_php'];
+$PHPCAP = new Captcha(CAPTCHA_LEN);
 
 // include_once '../models/dbConfig.php';
-$myCon = new dbConfig();
+// $myCon = new dbConfig();
 $myCon->connect();
 
 function is_valid_email($email)
@@ -22,12 +24,8 @@ function is_valid_email($email)
 
 function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
 {
-   /* $from = $name . ' <' . $email . '>'; */
-   $from = SEND_EMAIL;
-   $to = REC_EMAIL;
-
    /* message (to use single quotes in the 'message' variable, supercede them with a back slash like this-->&nbsp; \' */
-   $message = '
+   $body = '
                 <!doctype html>
                  <html>
                  <head>
@@ -60,20 +58,12 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                  </html>
                 ';
 
-   /* To send HTML mail, the Content-type header must be set */
-   $headers = 'MIME-Version: 1.0' . "\r\n";
-   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-   /* Additional headers */
-   /* $headers .= 'To: test <test@example.com>, test2 <test2@example.com>' . "\r\n"; */
-   $headers .= 'From:' . $from . "\r\n";
-   /* $headers .= 'Cc: birthdayarchive@example.com' . "\r\n"; */
-   /* $headers .= 'Bcc: admin@yahoo.com' . "\r\n"; */
-   /* Send the email */
-   mail($to, $subject, $message, $headers);
-   return true;
+   return sendEmail($message, $subject, $fname, $lname, $email, $phone, $body);
 }
+
 ?>
+
+
 <div class="container">
    <div class="row">
       <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="contactLabel"
@@ -102,7 +92,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                                  echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Required Details</div>');
                               } else if (!is_valid_email($_POST['email'])) {
                                  echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter a Valied E-mail</div>');
-                              } else if ($_POST['captchabox'] != $_SESSION['captcha']['code']) {
+                                 // } else if ($_POST['captchabox'] != $captcha_code) {
+                              } else if (!$PHPCAP->verify($_POST["captchabox"], 1)) {
                                  echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Correct Image value</div>');
                               } else {
                                  if (sendContactUsEmail($_POST['comment'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phone'], $_POST['subject'])) {
@@ -197,8 +188,12 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                         </div>
                         <div class="form-group col-xs-12">
                            <div class="form-group col-xs-6 voffset-1 col-xxs-full-width">
-                              <img src="<?= $_SESSION['captcha']['image_src']; ?>" alt="CAPTCHA1"
-                                 class="img-responsive col-xxs-center-img" />
+                              <!-- <img src="<?= $captcha_img ?>" alt="CAPTCHA1" class="img-responsive col-xxs-center-img" /> -->
+                              <?php
+                              $PHPCAP->prime(1);
+                              $PHPCAP->draw(1);
+                              ?>
+
                            </div>
                            <div class="form-group col-xs-6 col-xxs-full-width">
                               <label><span class="text-danger">*</span> Type the Image Text :</label><input
@@ -249,7 +244,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                                  echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Required Details</div>');
                               } else if (!is_valid_email($_POST['email'])) {
                                  echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter a Valied E-mail</div>');
-                              } else if ($_POST['captchabox'] != $_SESSION['captcha']['code']) {
+                                 // } else if ($_POST['captchabox'] != $captcha_code) {
+                              } else if (!$PHPCAP->verify($_POST["captchabox"], 2)) {
                                  echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Correct Image value</div>');
                               } else {
                                  $comment = 'Requested item/service(s) : ' . $_POST['cat_name'] . '<br/><br/>' . $_POST['comment'];
@@ -281,11 +277,9 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                            <label><span class="text-danger">*</span> First Name</label>
                            <input class="form-control" name="firstname" placeholder="Firstname" type="text" required
                               autofocus
-                              value="<?php
-                                                                                                                                       if (isset($_POST['firstname'])) {
+                              value="<?php if (isset($_POST['firstname'])) {
                                                                                                                                           echo $_POST['firstname'];
-                                                                                                                                       }
-                                                                                                                                       ?>" />
+                                                                                                                                       } ?>" />
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 voffset-2">
                            <label><span class="text-danger">*</span> Last Name</label>
@@ -338,13 +332,13 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 voffset-2">
                            <label><span class="text-danger">*</span> Subject</label>
-                           <input class="form-control" id="rent_subject" name="subject" placeholder="Subject"
+                           <input class="form-control" id="subject-rentals" name="subject" placeholder="Subject"
                               type="text" required
                               value="<?php
-                                                                                                                                          if (isset($_POST['subject'])) {
-                                                                                                                                             echo $_POST['subject'];
-                                                                                                                                          }
-                                                                                                                                          ?>" />
+                                                                                                                                             if (isset($_POST['subject'])) {
+                                                                                                                                                echo $_POST['subject'];
+                                                                                                                                             }
+                                                                                                                                             ?>" />
                         </div>
                      </div>
                      <div class="row">
@@ -364,8 +358,11 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                         </div>
                         <div class="form-group col-xs-12">
                            <div class="form-group col-xs-6 voffset-1 col-xxs-full-width">
-                              <img src="<?= $_SESSION['captcha']['image_src']; ?>" alt="CAPTCHA2"
-                                 class="img-responsive col-xxs-center-img" />
+                              <!-- <img src="<?= $captcha_img ?>" alt="CAPTCHA2" class="img-responsive col-xxs-center-img" /> -->
+                              <?php
+                              $PHPCAP->prime(2);
+                              $PHPCAP->draw(2);
+                              ?>
 
                            </div>
                            <div class="form-group col-xs-6 col-xxs-full-width">
@@ -402,7 +399,7 @@ $(document).ready(function() {
       });
    });
    $(".data_rent").click(function() {
-      $("#rent_subject").val($(this).data('id'));
+      $("#subject-rentals").val($(this).data('id'));
       $('#contact-rentals').modal({
          modal: true,
          backdrop: 'static',
@@ -426,7 +423,7 @@ $(document).ready(function() {
 </script>
 
 <?php
-/* captcha code */
+// $myCon->closeCon();
+?>
 
-
-cLog(pathinfo(__FILE__, PATHINFO_FILENAME) . ' loaded.'); ?>
+<?php cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.'); ?>
