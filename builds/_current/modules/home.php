@@ -6,7 +6,7 @@
    "webhost" => $_SERVER["HTTP_HOST"],
 ];
 
-function gzip_output()
+function gzip_output()  //! whats this??
 {
    $HTTP_ACCEPT = $_SERVER['HTTP_ACCEPT_ENCODING'];
    if (headers_sent()) {
@@ -57,7 +57,7 @@ include_once 'site_config.php';
    <meta name="robots" content="index,follow">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <title><?php echo $pageinfo['title']; ?></title>
+   <title><?= $pageinfo['title']; ?></title>
 
    <style>
    #devtagline {
@@ -96,7 +96,8 @@ include_once 'site_config.php';
    <div id="wrapper">
       <div id="container">
          <?php include_once './header.php'; ?>
-         <div class="container-fluid bg1" style="margin-top:5rem;">
+
+         <div class="container-fluid bg1" style="margin-top:5rem; background-size: auto !important;">
             <!-- <div class="col-xs-12" style="background-color: #ffffff99;"> -->
             <div class="col-xs-12" style="background-image: linear-gradient(to bottom, white,white,#ffffff99);">
                <div class="row">
@@ -104,7 +105,7 @@ include_once 'site_config.php';
                      <div class="row animatedParent">
                         <div class="col-xs-12 voffset-2 visible-xs">&nbsp;</div>
 
-                        <a href="<?= WEB_HOST ?>">
+                        <a href="<?= WEB_HOST ?>" target="_parent">
                            <img src="../<?= $website['images_folder'] ?>/<?= $website['logo'] ?>"
                               class="comp-logo img-responsive img-center animated fadeInUpShort"
                               alt="<?= $website['abbrev'] ?>_logo" />
@@ -117,8 +118,9 @@ include_once 'site_config.php';
 
                         <svg height="130" width="130" class="img-responsive img-center animated fadeInDownShort"
                            alt="Anniversary">
-                           <text x="0" y="70" fill="#0020BB30"
-                              style="font-family:georgia;font-size:12rem;"><?= date('Y') - 1989 ?></text>
+                           <text x="0" y="70" fill="#0020BB30" style="font-family:georgia;font-size:12rem;">
+                              <?= date('Y') - 1989 ?>
+                           </text>
                            <text x="50" y="83" fill="grey" style="font-family:serif;font-size:1.6rem;">years</text>
                            <text x="13" y="109">▒ ANNIVERSARY ▒</text>
                            <text x="37" y="128" style="font-style:italic;font-size:1.2rem;">1989
@@ -135,7 +137,8 @@ include_once 'site_config.php';
                      <div class="row animatedParent animateOnce" data-sequence='500'>
                         <hr class="style-four" />
                         <div class="col-xs-12 voffset-3 visible-xs visible-sm"></div>
-                        <h3 class="voffset-1 voffset-b-3 text-center text-uppercase text-bold">Our Products & Services
+                        <h3 class="voffset-1 voffset-b-3 text-center text-uppercase text-bold">Our Products &
+                           Services
                         </h3>
 
 
@@ -170,8 +173,8 @@ include_once 'site_config.php';
                                     <div class="front-items sp animated pulse slow hvr-overline-from-center"
                                        data-id='<?php echo $data_id; ?>'>
                                        <div class="icon-wrap">
-                                          <a
-                                             href="<?php echo (defined("SITES")) ? SITES[$row['cat_order']] : $row['custom_url']; ?>">
+                                          <a href="<?php echo (defined("SITES")) ? SITES[$row['cat_order']] : $row['custom_url']; ?>"
+                                             target="_parent">
                                              <img
                                                 src="../<?php echo ($row['upload_path'] != null) ? 'uploads/' . $row['upload_path'] : $website['images_folder'] . '/' . $row['cat_logo']; ?>"
                                                 class="img-responsive" alt="<?php echo $row['cat_url_slug']; ?>">
@@ -205,6 +208,7 @@ include_once 'site_config.php';
                </div>
             </div>
          </div>
+
          <div class="others bg2">
             <div class="container-fluid animatedParent color3" style=" background-color: #ffffff99">
                <div class="container voffset-3 voffset-b-3" style="background-color: #ffffff99;">
@@ -255,7 +259,7 @@ include_once 'site_config.php';
                                  $result = $myCon->query($query);
                                  while ($row = mysqli_fetch_assoc($result)) {
                                  ?>
-                                 <a
+                                 <a target="_parent"
                                     href="<?php echo ($row['local_url'] != null) ? $row['local_url'] : $row['custom_url']; ?>">
                                     <div class="row">
                                        <div class="col-xs-5 col-xxs-full-width">
@@ -400,7 +404,7 @@ $(window).resize(function() {
 
 
 
-//gzip_output();
+// gzip_output();
 ?>
 
 <?= cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.'); ?>
