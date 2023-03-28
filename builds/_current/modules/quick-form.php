@@ -79,6 +79,9 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                <div class="row">
                   <div class="col-xs-12 voffset-1 voffset-b-1">
                      <div class="container-fluid">
+                        <div style="display: none;" id="wait_data" class="text-center">
+                           <p>Please wait - sending your request...<br /></p>
+                        </div>
                         <?php
                         if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['quick-form']) &&
                            $_POST['quick-form'] == 'products'
@@ -114,8 +117,10 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                      </div>
                   </div>
                </div>
-               <form id="prd_form_id" action="#" method="post" accept-charset="utf-8" class="text-left">
+               <form id="prd_form_id" action="#" method="post" accept-charset="utf-8" class="text-left"
+                  style="display: <?= isset($_POST['submitted-prd']) ? "none" : ""; ?>">>
                   <input type="hidden" name="quick-form" value="products" />
+                  <input type="hidden" name="submitted-prd" value="no" />
                   <div class="modal-body">
                      <div class="fetched-data"></div>
                      <div class="row">
@@ -216,6 +221,7 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
       </div>
    </div>
    <!-- row END -->
+
    <!-- Rentals row Start -->
    <div class="row">
       <div class="modal fade" id="contact-rentals" tabindex="-1" role="dialog" aria-labelledby="contactLabel"
@@ -230,46 +236,50 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                <div class="row">
                   <div class="col-xs-12 voffset-1 voffset-b-1">
                      <div class="container-fluid">
-                        <?php
-                        if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['quick-form']) &&
-                           $_POST['quick-form'] == 'rentals'
-                        ) {
-                           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                              if (
-                                 trim($_POST['firstname']) == null || trim($_POST['lastname']) == null ||
-                                 trim($_POST['phone']) == null || trim($_POST['email']) == null ||
-                                 trim($_POST['subject']) == null || trim($_POST['captchabox']) == null ||
-                                 trim($_POST['cat_name']) == null
-                              ) {
-                                 echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Required Details</div>');
-                              } else if (!is_valid_email($_POST['email'])) {
-                                 echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter a Valied E-mail</div>');
-                                 // } else if ($_POST['captchabox'] != $captcha_code) {
-                              } else if (!$PHPCAP->verify($_POST["captchabox"], 2)) {
-                                 echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Correct Image value</div>');
-                              } else {
-                                 $comment = 'Requested item/service(s) : ' . $_POST['cat_name'] . '<br/><br/>' . $_POST['comment'];
-                                 if (sendContactUsEmail($comment, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phone'], $_POST['subject'])) {
-                                    unset($_POST['firstname']);
-                                    unset($_POST['lastname']);
-                                    unset($_POST['email']);
-                                    unset($_POST['phone']);
-                                    unset($_POST['comment']);
-                                    unset($_POST['subject']);
-                                    unset($_POST['cat_name']);
-                                    echo ('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Thank you for contacting us.</strong> We have received your enquiry and will respond to you shortly.</div>');
-                                 } else {
-                                    echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Sorry, Message not sent</div>');
+                        <div style="display: none;" id="wait_rental" class="text-center">
+                           <p>Please wait - sending your request...<br /></p>
+                        </div> <?php
+                                 if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['quick-form']) &&
+                                    $_POST['quick-form'] == 'rentals'
+                                 ) {
+                                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                       if (
+                                          trim($_POST['firstname']) == null || trim($_POST['lastname']) == null ||
+                                          trim($_POST['phone']) == null || trim($_POST['email']) == null ||
+                                          trim($_POST['subject']) == null || trim($_POST['captchabox']) == null ||
+                                          trim($_POST['cat_name']) == null
+                                       ) {
+                                          echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Required Details</div>');
+                                       } else if (!is_valid_email($_POST['email'])) {
+                                          echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter a Valied E-mail</div>');
+                                          // } else if ($_POST['captchabox'] != $captcha_code) {
+                                       } else if (!$PHPCAP->verify($_POST["captchabox"], 2)) {
+                                          echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Correct Image value</div>');
+                                       } else {
+                                          $comment = 'Requested item/service(s) : ' . $_POST['cat_name'] . '<br/><br/>' . $_POST['comment'];
+                                          if (sendContactUsEmail($comment, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phone'], $_POST['subject'])) {
+                                             unset($_POST['firstname']);
+                                             unset($_POST['lastname']);
+                                             unset($_POST['email']);
+                                             unset($_POST['phone']);
+                                             unset($_POST['comment']);
+                                             unset($_POST['subject']);
+                                             unset($_POST['cat_name']);
+                                             echo ('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Thank you for contacting us.</strong> We have received your enquiry and will respond to you shortly.</div>');
+                                          } else {
+                                             echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Sorry, Message not sent</div>');
+                                          }
+                                       }
+                                    }
                                  }
-                              }
-                           }
-                        }
-                        ?>
+                                 ?>
                      </div>
                   </div>
                </div>
-               <form id="rent_form_id" action="" method="post" accept-charset="utf-8" class="text-left form">
+               <form id="rent_form_id" action="" method="post" accept-charset="utf-8" class="text-left form"
+                  style="display: <?= isset($_POST['submitted-rental']) ? "none" : ""; ?>">
                   <input type="hidden" name="quick-form" value="rentals" />
+                  <input type="hidden" name="submitted-rental" value="no" />
                   <div class="modal-body">
                      <div class="fetched-data"></div>
                      <div class="row">
@@ -389,6 +399,17 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
 </div>
 
 <script>
+$('#prd_form_id').submit(function(e) {
+   // $(this).children('input[type=submit]').prop('disabled', true);
+   $('#wait_data').show();
+   $('#submitted-prd').val('yes');
+   $(this).hide();
+});
+$('#rent_form_id').submit(function(e) {
+   $('#wait_rental').show();
+   $('#submitted-rental').val('yes');
+   $(this).hide();
+});
 $(document).ready(function() {
    $(".data_inq").click(function() {
       $("#subject").val($(this).data('id'));
