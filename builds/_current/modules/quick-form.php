@@ -106,7 +106,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                                     unset($_POST['phone']);
                                     unset($_POST['comment']);
                                     unset($_POST['subject']);
-                                    echo ('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Thank you for contacting us.</strong> We have received your enquiry and will respond to you shortly.</div>');
+                                    // echo ('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Thank you for contacting us.</strong> We have received your enquiry and will respond to you shortly.</div>');
+                                    echo ('<div class="alert alert-success alert-dismissible" role="alert"><strong>Thank you for contacting us.</strong> We have received your enquiry and will respond to you shortly.</div>');
                                  } else {
                                     echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Sorry, Message not sent</div>');
                                  }
@@ -244,10 +245,13 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                                  ) {
                                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                        if (
-                                          trim($_POST['firstname']) == null || trim($_POST['lastname']) == null ||
-                                          trim($_POST['phone']) == null || trim($_POST['email']) == null ||
-                                          trim($_POST['subject']) == null || trim($_POST['captchabox']) == null ||
-                                          trim($_POST['cat_name']) == null
+                                          trim($_POST['firstname']) == null
+                                          || trim($_POST['lastname']) == null
+                                          || trim($_POST['phone']) == null
+                                          || trim($_POST['email']) == null
+                                          || trim($_POST['subject']) == null
+                                          || trim($_POST['captchabox']) == null
+                                          || empty($_POST['cat_name']) //! is array
                                        ) {
                                           echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Required Details</div>');
                                        } else if (!is_valid_email($_POST['email'])) {
@@ -256,7 +260,11 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                                        } else if (!$PHPCAP->verify($_POST["captchabox"], 2)) {
                                           echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please Enter Correct Image value</div>');
                                        } else {
-                                          $comment = 'Requested item/service(s) : ' . $_POST['cat_name'] . '<br/><br/>' . $_POST['comment'];
+                                          $comment = 'Requested item/service(s) : ';
+                                          foreach ($_POST['cat_name'] as $value) {
+                                             $comment .= $value . ', ';
+                                          };
+                                          $comment .= '<br/><br/> Comments : ' . $_POST['comment'];
                                           if (sendContactUsEmail($comment, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phone'], $_POST['subject'])) {
                                              unset($_POST['firstname']);
                                              unset($_POST['lastname']);
@@ -265,7 +273,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                                              unset($_POST['comment']);
                                              unset($_POST['subject']);
                                              unset($_POST['cat_name']);
-                                             echo ('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Thank you for contacting us.</strong> We have received your enquiry and will respond to you shortly.</div>');
+                                             // echo ('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Thank you for contacting us.</strong> We have received your enquiry and will respond to you shortly.</div>');
+                                             echo ('<div class="alert alert-success alert-dismissible" role="alert"><strong>Thank you for contacting us.</strong> We have received your enquiry and will respond to you shortly.</div>');
                                           } else {
                                              echo ('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Sorry, Message not sent</div>');
                                           }
@@ -329,8 +338,8 @@ function sendContactUsEmail($message, $fname, $lname, $email, $phone, $subject)
                            $query = "SELECT * FROM item_main_category WHERE active ='1' ORDER BY cat_name ASC";
                            $result = $myCon->query($query);
                            ?>
-                           <select name="cat_name" class="form-control selectpicker" multiple show-menu-arrow required
-                              data-size="5">
+                           <select name="cat_name[]" multiple required data-size="5" show-menu-arrow
+                              class="form-control selectpicker">
                               <option disabled>Please Select one or more option(s)</option>
                               <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                               <option value="<?php echo ($row['cat_name']); ?>">
