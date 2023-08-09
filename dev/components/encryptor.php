@@ -1,32 +1,44 @@
 <?php
 
-$input_string = readline('Enter a string: '); // for cmd line use
+// Encryptor is primarily for cmd line use --------------
+$input_string = readline('Enter a string: ');
 if ($input_string) encryptor($input_string);
+// -----------
 
-function encryptor($simple_string)
+function encryptor($plaintext)
 {
-   if ($simple_string) {
-      if (strlen($simple_string) < 6) {
+   if ($plaintext) {
+      if (strlen($plaintext) < 6) {
          echo "minimum 8 characters.";
          exit();
       }
-      $ciphering = "BF-CBC"; // Store cipher method
-      $encryption_key = openssl_digest(php_uname(), 'MD5', TRUE); // len 16
-      $encryption_iv = random_bytes(openssl_cipher_iv_length($ciphering));
-      // Encryption of string process starts
+
+      // $cipher = "bf-cbc"; // no longer in print_r(openssl_get_cipher_methods());!!!!
+      $cipher = "aes-128-cbc";
+      in_array($cipher, openssl_get_cipher_methods()) or die("cipher error");
+
+      $key = openssl_digest(php_uname(), 'MD5', true); // len will be pad/trunc=16       (therefore this must be generated at system where php will run)
+
+      // $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher));
+      $iv = random_bytes(openssl_cipher_iv_length($cipher));
+
       $encryption = openssl_encrypt(
-         $simple_string,
-         $ciphering,
-         $encryption_key,
+         $plaintext,
+         $cipher,
+         $key,
          $options = 0,
-         $encryption_iv
+         $iv
       );
-      $encryption2 = bin2hex($encryption_key) . $encryption . bin2hex($encryption_iv);
-      echo "\n<br/>Encrypted: " . $encryption2;
+
+      // echo  bin2hex($key) . "\n-" . $encryption . "-\n" . bin2hex($iv) . "\n";
+      $cryptext = bin2hex($key) . $encryption . bin2hex($iv);
+      echo "\n<br/>Encrypted: " . $cryptext;
+
       include_once "decryptor.php";
-      echo "\n<br/>Decrypted!: " . decryptor($encryption2);
-      return $encryption2;
+      echo "\n<br/>Decrypted!: " . decryptor($cryptext);
+
+      return $cryptext;
    };
 }
 
-cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.');
+function_exists("cLog") ? cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.') : null;

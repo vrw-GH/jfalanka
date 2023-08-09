@@ -88,7 +88,14 @@
             Copyright &copy; 1989 - <?php echo date('Y') . ' ' . $website['title']; ?> All Rights Reserved.<br />
          </div>
          <div class="col-xs-12 col-sm-6 col-xs-text-center col-xxs-text-center col-pdn-both-0 text-right">
-            Site Design <a href="<?= SITE_DEV[0] ?>" target="_parent"><?= SITE_DEV[1] ?></a>
+            Site Design <a href="<?= $app['info']['developer']['web'] ?>" target="_blank" title="Software Info: 
+<?= $app['info']['version'] ?>/<?= $app['info']['title'] ?>/<?= $pageinfo['mode'] ?> 
+Lic:<?= $app['info']['licence'] ?> 
+🧞‍♂️<?= $app['info']['lead'] ?> 
+🕸<?= $app['info']['developer']['web'] ?> 
+📞<?= $app['info']['developer']['phone'] ?> 
+            ">
+               <?= $app['info']['developer']['descr'] ?></a>
          </div>
       </div>
    </div>

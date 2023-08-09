@@ -5,39 +5,39 @@ if (!isset($_SESSION)) {
 }
 $systemdate = date('Y-m-d');
 $pid = 1;
+$website['admin_folder'] = 'admin';
 
-include_once '../components/domaininfo.php';
-include_once '../admin/admin_config_master.php';
-include_once '../' . $website["admin_folder"] . '/admin_config.php';  // additional admin configs
-if (file_exists('../.localDevOnly/dev-definitions.php')) { // Use Local (Dev) Customizations
+include_once '../' . $website["admin_folder"] . '/components.php';
+include_once '../' . $website["admin_folder"] . '/domain_info.php';
+include_once '../' . $website["admin_folder"] . '/website.php';
+
+// Use Local (Dev) Customizations:
+if (file_exists('../.localDevOnly/dev-definitions.php')) {
     /* This file sets up "DEV environment" on the local system only
-     * but should not affect LIVE server.
+     * but should not affect PROD server.
      * Also loads the DEBUGGING (cLog) system.
-     ! do **NOT** copy this ".localDevOnly" folder to LIVE site!
-     */
+     ! do **NOT** copy this ".localDevOnly" folder to LIVE site! 
+    */
     include_once '../.localDevOnly/dev-definitions.php';
 }
 function cLog($a)
 {
-    (function_exists("cLogger")) ? cLogger($a) : null;
+    (function_exists("cLogger")) ? cLogger($a) : null; //cLogger is loaded in dev-definitions
 };
 
-/* include .ENV file --------------------------------------------------
- * (wont overwrite if already defined) - ie: in dev-definitions.php
- */
-include_once 'get-dotenvs.php';
+//* include .ENV file 
+/* (wont overwrite if already defined) - ie: in dev-definitions.php */
+include_once '../' . $website['getdotenv_php'];
+
 
 /* --------------------------------------------------------------------
  * ENV fallbacks and additionals
  */
 define('LOCAL',  $_SERVER['SERVER_NAME'] == "localhost"); /* true/false */
 if (!defined('WEB_HOST'))       define('WEB_HOST', $domain['full_url']);
+if (!defined('SITE_SEO_KEY'))   define('SITE_SEO_KEY', '');
 if (!defined('CAPTCHA_LEN'))    define('CAPTCHA_LEN', 5);
 if (!defined('EMAIL_ISSMTP'))   define('EMAIL_ISSMTP', 1); // 1/"true" or 0/"" ( boolval() )
-define(
-    'SITE_DEV',
-    ["http://wrightsdesk.com", "Redesign(2023): The Leisure Co."]
-);
 
 /* --------------------------------------------------------------------
  * DB & Encryption
@@ -101,13 +101,7 @@ define('SITE_SEO',   $encObj->decode(SITE_SEO_KEY)); // ! decryption??
 define('OG_PRIFIX',  'prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"');
 
 $canonical_url = WEB_HOST;
-$pageinfo['mode'] = defined("APP_MODE") ? APP_MODE : null;
-$pageinfo['title'] = ($pageinfo['mode'] != "live") ? $pageinfo['title'] : $config['seo']['seo_title'];
-$pageinfo['tagline'] =
-    '<div id="devtagline">' .
-    'Mode: ' . strtoupper($pageinfo["mode"]) . ', ' .
-    'Host: >>' . $pageinfo["webhost"] . '<< ' .
-    '</div>';
+include_once '../' . $website["admin_folder"] . '/app_info.php';
 
 /* ---end of configs-------------------------------------------------- */
 

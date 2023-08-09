@@ -2,7 +2,8 @@
 
 function decryptor($passphraze)
 {
-   $ciphering = "BF-CBC"; // Select same cipher method   
+   // $ciphering = "BF-CBC"; // Select same cipher method   
+   $ciphering = "aes-128-cbc"; // Select same cipher method      
    $iv_length = openssl_cipher_iv_length($ciphering);
    // $decryption_key = openssl_digest(php_uname(), 'MD5', TRUE); // len 16
    $decryption_key = hex2bin(substr($passphraze, 0, 32));

@@ -32,6 +32,7 @@ include_once 'get-dotenvs.php';
  */
 define('LOCAL',  $_SERVER['SERVER_NAME'] == "localhost"); /* true/false */
 if (!defined('WEB_HOST'))       define('WEB_HOST', $domain['full_url']);
+if (!defined('SITE_SEO_KEY'))    define('SITE_SEO_KEY', '');
 if (!defined('CAPTCHA_LEN'))    define('CAPTCHA_LEN', 5);
 if (!defined('EMAIL_ISSMTP'))   define('EMAIL_ISSMTP', 1); // 1/"true" or 0/"" ( boolval() )
 define(

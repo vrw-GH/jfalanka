@@ -8,8 +8,8 @@ if (file_exists("../$envFile")) {
    $path = '../..';
 } else if (file_exists("../../../$envFile")) {
    $path = '../../..';
-} else if (file_exists(WEB_HOST . "/$envFile")) {
-   $path = WEB_HOST;
+} else if (file_exists($domain['full_url'] . "/$envFile")) {
+   $path = $domain['full_url'];
 }
 
 if (isset($path)) {

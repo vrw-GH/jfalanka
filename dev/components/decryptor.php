@@ -1,22 +1,24 @@
 <?php
 
-function decryptor($passphraze)
+function decryptor($cryptext)
 {
-   $ciphering = "BF-CBC"; // Select same cipher method   
-   $iv_length = openssl_cipher_iv_length($ciphering);
-   // $decryption_key = openssl_digest(php_uname(), 'MD5', TRUE); // len 16
-   $decryption_key = hex2bin(substr($passphraze, 0, 32));
-   $decryption_iv = hex2bin(substr($passphraze, - ($iv_length * 2)));
-   $decryptor = substr($passphraze, 32, strlen($passphraze) - 32 - ($iv_length * 2));
-   // Descrypt the string
+   $cipher = "aes-128-cbc"; // Select same cipher method   
+   in_array($cipher, openssl_get_cipher_methods()) or die("cipher error");
+   $key = hex2bin(substr($cryptext, 0, 32));
+   $iv = hex2bin(substr($cryptext, - (openssl_cipher_iv_length($cipher) * 2)));
+
+   $decryptor = substr($cryptext, 32, strlen($cryptext) - 32 - (openssl_cipher_iv_length($cipher) * 2));
+
    $decryption = openssl_decrypt(
       $decryptor,
-      $ciphering,
-      $decryption_key,
+      $cipher,
+      $key,
       $options = 0,
-      $decryption_iv
+      $iv
    );
+
+   // echo  $key . "\n" . $decryptor . "\n" . $iv . "\n";
    return $decryption;
 }
 
-cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.');
+function_exists("cLog") ? cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.') : null;

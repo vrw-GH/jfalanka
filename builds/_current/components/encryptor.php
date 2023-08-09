@@ -10,7 +10,8 @@ function encryptor($simple_string)
          echo "minimum 8 characters.";
          exit();
       }
-      $ciphering = "BF-CBC"; // Store cipher method
+      // $ciphering = "BF-CBC"; // Store cipher method
+      $ciphering = "aes-128-cbc";
       $encryption_key = openssl_digest(php_uname(), 'MD5', TRUE); // len 16
       $encryption_iv = random_bytes(openssl_cipher_iv_length($ciphering));
       // Encryption of string process starts
