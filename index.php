@@ -13,23 +13,30 @@
 
    <style>
    iframe[name=siteView] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-color: #f1e2e250;
       border: 1px solid #f1e2e230;
+      border-radius: 0 7px 0 0;
       margin: 3px 3px 0;
       padding: 0;
       width: calc(100% - 8px);
-      height: calc(100vh - 1.9rem);
+      height: calc(100vh - 1.7rem - 4px);
       min-height: min-content;
+      min-width: 280px;
+      max-width: calc(100% - 8px);
+      resize: horizontal;
    }
 
    #frametitle {
       position: absolute;
-      margin-top: -0.5rem;
+      margin-top: -0.15rem;
       right: 2rem;
-      background-color: white;
-      padding: 2px;
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 0 2px 0;
       border-radius: 8px;
-      font: italic 0.7rem arial;
+      font: italic 0.4rem arial;
       color: grey;
    }
 
@@ -52,7 +59,7 @@
 
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/includes/Parsedown.php';
-$Parser = new Parsedown();
+$Parser = new Parsedown(); // should be in local-docroot/includes
 $readfile = file_get_contents('docs/README.md');
 $readmeMD = $Parser->text($readfile);
 $readmeMD = '<div style="display:flex; justify-content:center; "><div>' . $readmeMD . '</div></div>';
@@ -68,24 +75,28 @@ $site = ["JFA Lanka", "jfalanka.com"];
    <span>
       <em>Project: </em><img src="./dev/resources/images/favicon.png" height=14px><strong><?= $site[0] ?></strong>
       &emsp;
-      <a href="docs/README.md" target="siteView" title="Readme Page">👁️‍🗨️</a>
+      <a href="data:text/html;charset=utf-8,<html><body>
+         <?= htmlspecialchars($readmeMD) ?>
+         </body></html>" target="siteView" title="README.md Page">👁️‍🗨️</a>
+
       <ul>
          <?php
          foreach ($subdir as $dir) {
             echo '<li><a href="' . $dir . '" target="siteView" title="View Folder">' . $dir . '</a></li>';
          };
          ?>
-         <!-- <span class="live">&nbsp; ( </span> -->
-         <li class="live"><a href="http://www.<?= $site[1] ?>" title="💡Ctrl-click - new page" target="siteView"
-               rel="noopener"><small>🌎&nbsp;</small><?= $site[1] ?></a></li>
-         <!-- <span class="live">&nbsp;)</span> -->
+&emsp;&emsp;
+         <li class="live"><a href="http://www.<?= $site[1] ?>" title="<?= $site[1] ?>💡Ctrl-click - new page"
+               target="siteView" rel="noopener"><small>🌎</small></a></li>
       </ul>
    </span>
 
 
    <div id="frametitle">Site View</div>
    <iframe name="siteView" src="docs/README.md" loading="lazy" title="siteView" srcdocxx="Loading..."
-      srcdoc='<?= $readmeMD ?>' onload="this.removeAttribute('srcdocxx')">
+      srcdoc='<?= $readmeMD ?>' onload="this.removeAttribute('srcdocxx')" ondblclick="{
+      this.style.width = 'calc(100% - 8px)';
+      }">
    </iframe>
 
 

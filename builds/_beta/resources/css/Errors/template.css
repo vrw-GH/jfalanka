@@ -1,0 +1,202 @@
+.formular label span {
+	color: #000;
+}
+
+.formular input,.formular select,.formular textarea {
+	display: block;  /* this breaks relative positioning */
+	margin-bottom: 5px;
+}
+
+.formular .text-input, .formular input, .formular select{
+	width: 300px;
+	color: #555;
+	padding: 4px;
+	border: 1px solid #B5B8C8;
+	font-size: 14px;
+	margin-top: 4px;
+	background: #FFF;
+	float:left;
+	display:block;
+}
+	.formular .text-input:hover, .formular input:hover, .formular select:hover{
+		 border:1px solid #b8e5ff;
+	}
+	.formular input.small, .formular select.small{
+		width: 80px;
+	}
+	.formular input.less-half-size, .formular select.less-half-size{
+		width: 110px;
+	}
+	.formular input.half-size, .formular select.half-size{
+		width: 150px;
+	}
+	.formular input.over-half-size, .formular select.over-half-size{
+		width: 200px;
+	}
+.formular textarea {
+	width: 300px;
+	height: 70px;
+	color: #555;
+	padding: 4px;
+	border: 1px solid #B5B8C8;
+	font-size: 14px;
+	margin-top: 4px;
+	background: #FFF repeat-x;
+	resize:none;
+}
+	.formular textarea.large {
+		width:600px;
+	}
+
+.formular .infos {
+	background: #FFF;
+	color: #333;
+	font-size: 12px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.formular span.checkbox, .formular .checkbox, .formular .radio {
+	display: inline;
+}
+
+.formular .submit, .submit, .formular .update, .update {
+	width:150px;
+	height:35px;
+	margin: 20px 20px 20px 20px;
+	padding:0;
+	border:none;
+	display:block;
+	float:right;
+	background:#1e4ebd;
+	font-size:13px;
+	font-weight:600;
+	color:#FFF;
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+	-webkit-box-shadow: 0 1px 2px rgba(55,111,189,.2);
+	-moz-box-shadow: 0 1px 2px rgba(55,111,189,.2);
+	box-shadow: 0 1px 2px rgba(55,111,189,.2);
+	cursor:pointer;
+}
+	.formular .submit:hover, .formular .update:hover {
+		background:#0f3ca3;
+	}
+	button[disabled]:active, button[disabled],
+	input[type="reset"][disabled]:active,
+	input[type="reset"][disabled],
+	input[type="button"][disabled]:active,
+	input[type="button"][disabled],
+	select[disabled] > input[type="button"],
+	select[disabled] > input[type="button"]:active,
+	input[type="submit"][disabled]:active,
+	input[type="submit"][disabled] {
+		background:#999;
+		border:1px solid #888;
+	}
+	button[disabled]:hover, button[disabled]:hover,
+	input[type="reset"][disabled]:hover,
+	input[type="reset"][disabled],
+	input[type="button"][disabled]:hover,
+	input[type="button"][disabled],
+	select[disabled] > input[type="button"],
+	select[disabled] > input[type="button"]:hover,
+	input[type="submit"][disabled]:hover,
+	input[type="submit"][disabled] {
+		background:#999;
+	}
+.formular .reset {
+	width:150px;
+	height:35px;
+	margin: 20px 0 0 10px;
+	padding:0;
+	border:none;
+	display:inline;
+	float:left;
+	background:#ff7a2a;
+	border:1px solid #fc711d;
+	font-size:13px;
+	font-weight:600;
+	color:#FFF;
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+	-webkit-box-shadow: 0 1px 2px rgba(55,111,189,.2);
+	-moz-box-shadow: 0 1px 2px rgba(55,111,189,.2);
+	box-shadow: 0 1px 2px rgba(55,111,189,.2);
+	cursor:pointer;
+}
+.formular hr {
+	clear: both;
+	visibility: hidden;
+}
+
+.formular .fc-error {
+	width: 350px;
+	color: #555;
+	padding: 4px;
+	border: 1px solid #B5B8C8;
+	font-size: 12px;
+	margin-bottom: 15px;
+	background: #FFEAEA;
+}
+
+
+/** -------------------------------------------------       */
+.contact .text-input, .contact input, .contact select{
+	width: 250px;
+	color: #555;
+	padding: 4px;
+	border: 1px solid #B5B8C8;
+	font-size: 14px;
+	margin-top: 4px;
+	background: #FFF repeat-x;
+	float:left;
+	display:block;
+}
+.contact .checkbox{
+	width: 25px;
+	color: #555;
+	padding: 4px;
+	border: 1px solid #B5B8C8;
+	font-size: 14px;
+	margin-top: 4px;
+	background: #FFF repeat-x;
+	float:left;
+	display:block;
+}
+.contact textarea {
+	width: 250px;
+	height: 180px;
+	color: #555;
+	padding: 4px;
+	border: 1px solid #B5B8C8;
+	font-size: 14px;
+	margin-top: 4px;
+	background: #FFF repeat-x;
+	resize:none;
+}
+.contact .infos {
+	background: #FFF;
+	color: #333;
+	font-size: 12px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+.contact span.checkbox, .contact .checkbox, .contact .radio {
+	display: inline;
+}
+.contact hr {
+	clear: both;
+	visibility: hidden;
+}
+.contact .fc-error {
+	width: 190px;
+	color: #555;
+	padding: 4px;
+	border: 1px solid #B5B8C8;
+	font-size: 12px;
+	margin-bottom: 15px;
+	background: #FFEAEA;
+}
