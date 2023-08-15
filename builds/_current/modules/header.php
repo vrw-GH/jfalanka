@@ -12,7 +12,7 @@ $myCon->connect();
 ?>
 
 
-<div id="header" class="<?php if ($pid == 1) echo 'home'; ?>" style="position: fixed; z-index:99;">
+<div id="header" class="<?php $pid == 1 ? 'home' : ''; ?>" style="position: fixed; z-index:99;">
    <div class="container-fluid">
       <div class="row">
          <div class="col-xs-12 top-hd-layer col-pdn-both-0">

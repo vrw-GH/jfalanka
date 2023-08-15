@@ -67,7 +67,7 @@ include_once 'site_config.php';
       left: 2px;
       max-width: 40%;
       /* height: max(min-content, 1.4rem); */
-      font-size: 1.2em;
+      font-size: 0.8em;
       height: max(min-content, 1.4rem);
       z-index: 999;
       padding: 0;

@@ -82,20 +82,24 @@
          </div>
       </div>
    </div>
+   <?php include_once "../admin/devinfo.php" ?>
    <div class="container-fluid copyright">
       <div class="container voffset-2 voffset-b-2">
          <div class="col-xs-12 col-sm-6 col-xs-text-center col-xxs-text-center col-pdn-both-0">
-            Copyright &copy; 1989 - <?php echo date('Y') . ' ' . $website['title']; ?> All Rights Reserved.<br />
+            &copy; 1989 - <?php echo date('Y') . ' ' . $website['title']; ?>
+            <br>
+            <small>All Rights Reserved.</small><br />
          </div>
          <div class="col-xs-12 col-sm-6 col-xs-text-center col-xxs-text-center col-pdn-both-0 text-right">
-            Site Design <a href="<?= SITE_DEV[0] ?>" target="_parent"><?= SITE_DEV[1] ?></a>
+            Site Design  <small style="color:red; cursor: pointer;" title="Click for info..." onclick="{   
+   document.getElementsByClassName('devinfo')[0].style.display=='block' ? document.getElementsByClassName('devinfo')[0].style.display='none' : document.getElementsByClassName('devinfo')[0].style.display='block';
+}"><?= $app['info']['developer']['descr'] ?></small>
          </div>
       </div>
    </div>
-</div>
-<br />
-<?php
+   <br />
+   <?php
 
-include_once './footer_css_js.php';
+   include_once './footer_css_js.php';
 
-cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.'); ?>
+   cLog(pathinfo(__FILE__, PATHINFO_BASENAME) . ' loaded.'); ?>
