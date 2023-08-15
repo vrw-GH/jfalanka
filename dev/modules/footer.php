@@ -91,7 +91,7 @@
             <small>All Rights Reserved.</small><br />
          </div>
          <div class="col-xs-12 col-sm-6 col-xs-text-center col-xxs-text-center col-pdn-both-0 text-right">
-            Site Design  <small style="color:red; cursor: hand;" title="Click to toggle info..." onclick="{   
+            Site Design  <small style="color:red; cursor: pointer;" title="Click for info..." onclick="{   
    document.getElementsByClassName('devinfo')[0].style.display=='block' ? document.getElementsByClassName('devinfo')[0].style.display='none' : document.getElementsByClassName('devinfo')[0].style.display='block';
 }"><?= $app['info']['developer']['descr'] ?></small>
          </div>

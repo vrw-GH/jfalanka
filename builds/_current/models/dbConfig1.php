@@ -38,11 +38,15 @@ class dbConfig1
 
     public function connect()
     {
-        $this->dbq = mysqli_connect($this->db_host, $this->db_user, $this->db_pass); //Store data connection specifier in object
         /* Check connection */
+        try {
+            $this->dbq = mysqli_connect($this->db_host, $this->db_user, $this->db_pass);
+        } catch (\Throwable $th) {
+            die("MySQL connect fail: " . mysqli_connect_error());
+        }
         // if (mysqli_connect_errno($this->dbq)) {
         if (mysqli_connect_errno()) {
-            die("Failed to connect to MySQL: " . mysqli_connect_error());
+            die("MySQL connect error: " . mysqli_connect_error());
         }
         mysqli_select_db($this->dbq, $this->db_name) or die("cannot select DB");
     }

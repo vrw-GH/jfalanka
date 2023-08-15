@@ -2,7 +2,6 @@
 
 class encryption
 {
-
     private $skey = "abc25dfsdgh2374e"; // you can change it	
     private $cipher = "aes-128-gcm";
     private $tag = null;
