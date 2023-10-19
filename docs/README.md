@@ -2,12 +2,12 @@
 
 ## JFA website - root (home page)
 
-![screenshot](https://github.com/vrw-GH/assets/raw/main/repo-media/jfalanka/Screenshot.png)
+![screenshot](https://raw.githubusercontent.com/vrw-GH/assets/main/repo-media/jfalanka/Screenshot.png)
 
 ---
 
 <pre>
-Versions:
+<u>VERSIONS:</u>
   *Beta(Online): <a href="https://wrightsdesk.com/JFA/jfalanka">builds/_current</a>
   *Dev Build:    <a href="https://github.com/vrw-GH/jfalanka/tree/main/dev2">jfalanka/dev2</a>
   *Live Site:    <a href="http://www.jfalanka.com">jfalanka.com</a>

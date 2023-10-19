@@ -1,7 +1,7 @@
-# !! This is Hardlinked to all dead-project-directories - INDEX only!
+# !! This is Hardlinked to all DEAD-project-directories - show the INDEX only!
 
 # required for displaying as "directory" in local mode 
-# i.e: ignore ph,htm[l] files
+# i.e: ignore php,htm[l] files
 RemoveHandler .php .htm .html
 RemoveType .php .htm .html
 
@@ -10,4 +10,3 @@ DirectoryIndex disabled
 
 IndexIgnore index.php index.html
 IndexIgnore ".." #disable parent directory
-
