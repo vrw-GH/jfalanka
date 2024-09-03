@@ -8,8 +8,8 @@ if ($input_string) encryptor($input_string);
 function encryptor($plaintext)
 {
    if ($plaintext) {
-      if (strlen($plaintext) < 6) {
-         echo "minimum 8 characters.";
+      if (strlen($plaintext) < 4) {
+         echo "minimum 8? characters.";
          exit();
       }
 
