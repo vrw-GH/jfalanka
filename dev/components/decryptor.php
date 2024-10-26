@@ -1,5 +1,12 @@
 <?php
 
+// if cmdline use:
+if (!empty($argv[1])) {
+//  $string = parse_str($argv[1], $_GET);
+#  var_dump($argv[1]);
+  echo "Decrypted!: ".decryptor($argv[1]);
+};
+
 function decryptor($cryptext)
 {
    $cipher = "aes-128-cbc"; // Select same cipher method   
@@ -17,7 +24,7 @@ function decryptor($cryptext)
       $iv
    );
 
-   // echo  $key . "\n" . $decryptor . "\n" . $iv . "\n";
+   //echo  $key . "\n" . $decryptor . "\n" . $iv . "\n";
    return $decryption;
 }
 
