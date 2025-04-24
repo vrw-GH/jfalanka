@@ -26,7 +26,7 @@
                <li><a href="#" class="scrollme">Home</a></li>
                <li><a href="#about">About Us</a></li>
                <li><a href="#contact_link">Contact Us</a></li>
-               <li><a href="pages/opportunities">Careers & Business Opportunities</a></li>
+               <li><a href="pages/opportunities/">Careers & Business Opportunities</a></li>
             </ul>
          </div>
          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 side-menu">
@@ -68,8 +68,8 @@
                <?php } ?>
                <?php if ($website["gplus"] != null) { ?>
                <li><a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip"
-                     data-placement="bottom" title="Follow on Google Plus">
-                     <div class="media-icn top gp"></div> Follow on Google Plus
+                     data-placement="bottom" title="More on Google">
+                     <div class="media-icn top gp"></div> More on Google
                   </a></li>
                <?php } ?>
                <?php if ($website["yt"] != null) { ?>

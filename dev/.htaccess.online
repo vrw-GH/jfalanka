@@ -1,0 +1,77 @@
+# Options:
+Options +FollowSymlinks
+# Disable directory browsing:
+Options -Indexes
+
+# Redirection and rewriting:
+
+Redirect 301 /tropicalhomes    /modules/pages/tropicalhomes
+Redirect 301 /tropicalvillas   /modules/pages/tropicalvillas
+Redirect 301 /greenagro        /modules/pages/greenagro
+
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} !^/\_current/
+RewriteCond %{DOCUMENT_ROOT}/\_current%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/\_current%{REQUEST_URI} -d
+RewriteRule ^(.*)$ /\_current/$1 [L]
+#RedirectMatch permanent ^/$ http://www.jfalanka.com/_current
+
+# remove the .php extention:
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME}\.php -f 
+RewriteRule ^(.*)$ $1.php
+
+# Disable the server signature:
+ServerSignature Off
+
+# Protect ADMIN files:
+<files "admin\*.*">
+order allow,deny
+deny from all
+</files>
+
+# Protect ENV files:
+<files ~ "^.*\.([Ee][Nn][Vv])">
+order allow,deny
+deny from all
+satisfy all
+</files>
+
+# Deny access to all HTACCESS files:
+<files ~ "^.*\.([Hh][Tt][Aa])">
+order allow,deny
+deny from all
+satisfy all
+</files>
+
+# Display custom error pages:
+ErrorDocument 400 /error000.php
+ErrorDocument 403 /error000.php
+ErrorDocument 404 /error000.php
+ErrorDocument 500 /error000.php
+ErrorDocument 503 /error000.php
+
+# Setup browser caching:
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/x-icon "access 1 year"
+ExpiresByType image/gif "access 1 year"
+ExpiresByType image/png "access 1 year"
+ExpiresByType application/pdf "access 6 month"
+ExpiresByType application/x-shockwave-flash "access 6 month"
+ExpiresByType text/css "access 1 month"
+ExpiresByType text/x-javascript "access 1 month"
+ExpiresByType image/jpg "access 10 days"
+ExpiresByType image/jpeg "access 10 days"
+ExpiresDefault "access 2 days"
+</IfModule>
+
+
+#### Black List Section ####
+#This section is meant to be edited only through the Blacklist tool in your account manager. Please do not edit it manually.
+Order Allow,Deny
+Allow from All
+Deny from 89.37.119.196
+#### End of Black List Section ####

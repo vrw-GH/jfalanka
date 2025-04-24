@@ -8,10 +8,10 @@ $website['downloads_folder']         = 'downloads';
 $website['images_folder']            = 'resources/images';
 
 // components
-$website['getdotenv_php']            = 'components/get-dotenvs.php';
-$website['encryption_php']           = 'components/encryption.php';
-$website['decryptor_php']            = 'components/decryptor.php';
-$website['emailer_php']              = 'components/emailer.php';
+$website['getdotenv_php']            = 'components/get-dotenvs_v0.php';
+#$website['encryption_php']           = 'components/encryption.php';
+$website['decryptor_php']            = 'components/decryptor_v0.php';
+$website['emailer_php']              = 'components/emailer_v0.php';
 
 // models
 $website['db1_php']                  = 'models/dbConfig1.php';

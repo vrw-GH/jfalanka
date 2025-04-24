@@ -332,7 +332,7 @@ include_once 'site_config.php';
                      <?php }
                      if ($website["gplus"] != null) { ?>
                      <a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip"
-                        data-placement="bottom" title="Follow on Google Plus">
+                        data-placement="bottom" title="More on Google">
                         <div class="media-icn top gp"></div>
                      </a>
                      <?php }

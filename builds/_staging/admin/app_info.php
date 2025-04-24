@@ -1,7 +1,7 @@
 <?php
 
 /* app_info */
-$app['info']['version'] = "23.1.5";
+$app['info']['version'] = defined("APP_VER")?APP_VER:"0.1.0";
 $app['info']['title'] = "JFALanka";
 $app['info']['licence'] = "TLC/" . date('Y');
 // see also devinfo

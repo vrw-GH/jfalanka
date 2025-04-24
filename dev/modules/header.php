@@ -49,7 +49,7 @@ $myCon->connect();
                               </a> </li>
                         <?php } ?>
                         <?php if ($website["gplus"] != null) { ?>
-                           <li><a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Follow on Google Plus" class="scrollme">
+                           <li><a href="<?php echo $website["gplus"]; ?>" target="_blank" data-toggle="tooltip" data-placement="bottom" title="More on Google" class="scrollme">
                                  <img src="../<?= $website['images_folder'] ?>/social_gp_24x24_5_cr.png">
                               </a> </li>
                         <?php } ?>

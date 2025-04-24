@@ -1,7 +1,7 @@
 <!-- care to include where needed, could be hidden by previous divs -->
 <?php
-$app['info']['developer']['lead'] = "Victor Wright";
-$app['info']['developer']['web'] = ["wrightsdesk", "http://wrightsdesk.com"];
+$app['info']['developer']['lead']  = "Victor Wright";
+$app['info']['developer']['web']   = ["wrightsdesk", "http://wrightsdesk.com"];
 $app['info']['developer']['descr'] = "Redesign(2023): The Leisure Co.";
 $app['info']['developer']['email'] = "developer@wrightsdesk.com";
 $app['info']['developer']['phone'] = "+49 176 4677 4278";
